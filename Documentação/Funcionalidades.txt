@@ -1,0 +1,12 @@
+Exibição de programação por dia/horário/palestrante OK
+Programações favoritas OK
+Registro de Presença (através de QR Code) ( Módulo ?) OK
+Perguntas Frequentes (FAQ) OK
+Mandar perguntas para uma palestra OK
+Mapa do evento OK
+Chat entre participantes ( Módulo ?) OK
+Feed de postagens OK
+Notificações por palestra/postagens/tópicos OK
+Notas ( Módulo ?) NOP
+Sistema de gerenciamento WEB OK
+Feedback do evento (avaliações e reclamações) FALTA
