@@ -14,7 +14,7 @@ Programação, QR Code (único do congressista), Notas(Não vale a pena)
 
 Perguntar para cada programação em específico (se entrou no QR Code, então está presente na palestra - pegar a última palestra que leu QR Code)
 
-Sistema WEB - gerenciar conteúdos (Coliseu?)
+Sistema WEB - gerenciar conteúdos (Coliseu? Não. A ideia do app é ser separado do Coliseu.)
 Organizador também lê o QR Code
 
 3 n�veis de acesso -> Administrador, Staff e Congressista
@@ -39,7 +39,7 @@ Documentos importantes
 
 administrador pode postar documentos para o usuário baixar - exibição durante o período contratado
 
-implementar um sistema WEB com certificados e outros documentos(Coliseu?)
+implementar um sistema WEB com certificados e outros documentos(Coliseu?  Não. A ideia do app é ser separado do Coliseu.)
 
 divisão em pacotes - funcionalidades tem preço definido
 
@@ -51,3 +51,11 @@ programação orientada a componentes
 pesquisa de mercado
 mostrar que é mais caro em outro lugar
 valor/300
+
+------------------------------------------------
+
+Concorrência
+
+App da Campus Party
+App do ENEJ
+App Engage(Moblee)
