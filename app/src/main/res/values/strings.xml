@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Parthenon</string>
+    <string name="title_home">Home</string>
+    <string name="title_perfil">Dashboard</string>
+    <string name="title_noticias">Notifications</string>
+    <string name="title_outro">teste</string>
+</resources>
