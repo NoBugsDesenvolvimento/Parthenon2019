@@ -14,8 +14,8 @@ public class Profile extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.profile, container, false);
+        return inflater.inflate(R.layout.profile, container, false);
 
-        return rootView;
     }
+
 }

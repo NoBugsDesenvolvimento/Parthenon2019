@@ -1,4 +1,7 @@
 <resources>
+
+    <string name="placeholder">--------------------</string>
+
     <string name="app_name">Parthenon</string>
 
     <string name="title_prog">Programação</string>
@@ -13,4 +16,18 @@
         <item>Data</item>
     </string-array>
 
+    <string name="search">Pesquisar</string>
+    <string name="filterButton">Filtrar Busca</string>
+    <string name="order">Ordenar Por: </string>
+    <string name="orderASC">Crescente</string>
+    <string name="orderDSC">Decrescente</string>
+    <string name="palestras">Palestras</string>
+    <string name="minicursos">Minicursos</string>
+    <string name="todos">Todos</string>
+    <string name="inscritos">Inscritos</string>
+
+    <string name="img_p_placeholder">Imagem da Palestra/Minicurso</string>
+    <string name="name_placeholder">Nome: </string>
+    <string name="time_placeholder">Hora: </string>
+    <string name="local_placeholder">Local: </string>
 </resources>

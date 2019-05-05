@@ -9,9 +9,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -110,9 +109,10 @@ public class NavigationScreen extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
+            TextView header = findViewById(R.id.headerText);
             switch (position){
                 case 0:
-                    Log.v("rgk", "coé");
+                    header.setText(R.string.title_prog);
                     return new Programacao();
                 case 1:
                     break;
