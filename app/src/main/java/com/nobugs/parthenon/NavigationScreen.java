@@ -9,6 +9,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -22,7 +23,6 @@ public class NavigationScreen extends FragmentActivity {
     private PagerAdapter pagerAdapter;
     private BottomNavigationView navView;
     private TabLayout tabs;
-    private String[] name = new String[]{"Home", "Perfil", "Notícias", "Outro"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +47,16 @@ public class NavigationScreen extends FragmentActivity {
         public void onTabSelected(TabLayout.Tab tab) {
             switch(tabs.getSelectedTabPosition()){
                 case 0:
-                    navView.setSelectedItemId(R.id.nav_home);
+                    navView.setSelectedItemId(R.id.nav_prog);
                     break;
                 case 1:
-                    navView.setSelectedItemId(R.id.nav_perfil);
-                    break;
-                case 2:
                     navView.setSelectedItemId(R.id.nav_noticias);
                     break;
+                case 2:
+                    navView.setSelectedItemId(R.id.nav_faq);
+                    break;
                 case 3:
-                    navView.setSelectedItemId(R.id.nav_outro);
+                    navView.setSelectedItemId(R.id.nav_perfil);
                     break;
             }
         }
@@ -75,16 +75,16 @@ public class NavigationScreen extends FragmentActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.nav_home:
+                case R.id.nav_prog:
                     viewPager.setCurrentItem(0);
                     return true;
-                case R.id.nav_perfil:
+                case R.id.nav_noticias:
                     viewPager.setCurrentItem(1);
                     return true;
-                case R.id.nav_noticias:
+                case R.id.nav_faq:
                     viewPager.setCurrentItem(2);
                     return true;
-                case R.id.nav_outro:
+                case R.id.nav_perfil:
                     viewPager.setCurrentItem(3);
                     return true;
             }
@@ -112,7 +112,8 @@ public class NavigationScreen extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    break;
+                    Log.v("rgk", "coé");
+                    return new Programacao();
                 case 1:
                     break;
                 case 2:

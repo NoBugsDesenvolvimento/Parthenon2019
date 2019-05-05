@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">Parthenon</string>
-    <string name="title_home">Home</string>
-    <string name="title_perfil">Dashboard</string>
-    <string name="title_noticias">Notifications</string>
-    <string name="title_outro">teste</string>
+
+    <string name="title_prog">Programação</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="title_noticias">Notícias</string>
+    <string name="title_faq">Perguntas Frequentes</string>
+
+    <string-array name="ordenacoes">
+        <item>Palestra</item>
+        <item>Palestrante</item>
+        <item>Local</item>
+        <item>Data</item>
+    </string-array>
+
 </resources>
