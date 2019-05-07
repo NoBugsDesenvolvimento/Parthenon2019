@@ -10,7 +10,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -109,20 +108,17 @@ public class NavigationScreen extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            TextView header = findViewById(R.id.headerText);
             switch (position){
                 case 0:
-                    header.setText(R.string.title_prog);
                     return new Programacao();
                 case 1:
                     break;
                 case 2:
                     break;
                 case 3:
-                    break;
+                    return new Profile();
             }
-
-            return new Profile();
+            return new Programacao();
         }
 
         @Override
