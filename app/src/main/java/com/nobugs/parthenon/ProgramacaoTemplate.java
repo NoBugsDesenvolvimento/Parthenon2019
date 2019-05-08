@@ -17,18 +17,9 @@ public class ProgramacaoTemplate extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.prog_template, container, false);
-
-        TextView name = rootView.findViewById(R.id.name);
-        TextView autor = rootView.findViewById(R.id.autor);
-        TextView time = rootView.findViewById(R.id.time);
-        TextView local = rootView.findViewById(R.id.local);
-
-        name.setText(name.getText() + " " + savedInstanceState.getString("name"));
-        autor.setText(savedInstanceState.getString("autor"));
-        time.setText(time.getText() + " " + savedInstanceState.getString("time"));
-        local.setText(local.getText() + " " + savedInstanceState.getString("local"));
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.prog_template, container, false);
 
         return rootView;
     }
+
 }
