@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     app:cardBackgroundColor="#00F8F8F8"
+    android:layout_margin="10dp"
     app:cardCornerRadius="0dp"
     app:contentPadding="5dp"
-    tools:context="ProgramacaoTemplate">
+    tools:context=".ProgramacaoTemplate">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,9 +21,9 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="@string/img_p_placeholder"
+            android:src="@mipmap/palestra_img_bg"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/palestra_img_bg" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/infoLogo"

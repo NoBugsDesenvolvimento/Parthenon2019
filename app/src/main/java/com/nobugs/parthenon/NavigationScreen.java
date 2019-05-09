@@ -112,13 +112,13 @@ public class NavigationScreen extends FragmentActivity {
                 case 0:
                     return new Programacao();
                 case 1:
-                    break;
+                    return new Faq();
                 case 2:
-                    break;
+                    return new Faq();
                 case 3:
                     return new Profile();
             }
-            return new Programacao();
+            return new Faq();
         }
 
         @Override
