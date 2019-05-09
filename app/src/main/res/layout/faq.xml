@@ -6,17 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".Faq">
 
-    <TextView
-        android:id="@+id/faq_header"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:padding="7dp"
-        android:text="@string/title_faq"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/big_font_size"
-        android:textStyle="bold" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_question"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@drawable/search_input"
+            android:drawableStart="@drawable/ic_search_24dp"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="7dp"
+            android:text="@string/search"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="@dimen/normal_font_size"
+            tools:ignore="LabelFor"
+            tools:targetApi="o" />
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

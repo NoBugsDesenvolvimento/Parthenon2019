@@ -87,7 +87,7 @@
         android:layout_marginEnd="25dp"
         android:background="@color/colorPrimary"
         android:padding="5dp"
-        android:text="@string/profile_notifications"
+        android:text="@string/profile_signed"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="@dimen/big_font_size" />
@@ -119,5 +119,12 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="@dimen/big_font_size" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/version" />
 
 </LinearLayout>
