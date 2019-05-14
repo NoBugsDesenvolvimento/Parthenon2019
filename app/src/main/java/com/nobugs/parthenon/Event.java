@@ -1,7 +1,5 @@
 package com.nobugs.parthenon;
 
-import java.util.Date;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -12,7 +10,7 @@ public class Event extends RealmObject {
     private int id;
 
     private String name;
-    private Date date;
+    private String date;
     private String time;
     private int type;
 
@@ -28,7 +26,7 @@ public class Event extends RealmObject {
         type = 1;
         summary = "nome";
     }
-    public Event(int id, String name, Date date, String time, int type, String summary, Presenter author) {
+    public Event(int id, String name, String date, String time, int type, String summary, Presenter author) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -46,11 +44,11 @@ public class Event extends RealmObject {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

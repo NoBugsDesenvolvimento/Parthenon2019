@@ -2,12 +2,11 @@ package com.nobugs.parthenon;
 
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Space;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,10 +15,14 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
+
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 
 public class Programacao extends Fragment {
@@ -77,20 +80,22 @@ public class Programacao extends Fragment {
 
             LinearLayout scroll = rootView.findViewById(R.id.date);
 
+            Realm.init(getContext());
+            RealmConfiguration config = new RealmConfiguration.Builder()
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
 
-            for (int i = 0; i < 10; i++) {
+            Realm realm = Realm.getInstance(config);
+            RealmResults<Event> events = realm.where(Event.class).findAll();
+
+            int count = events.size();
+            for (int i = 0; i < count; i++) {
                 CardView templateProg = (CardView) inflater.inflate(R.layout.prog_template, scroll, false);
 
-                Bundle bd = new Bundle();
-                bd.putString("name", "Vo da aula de Android D+");
-                bd.putString("autor", "Róger");
-                bd.putString("time", "04:20");
-                bd.putString("local", "Aqui em casa bb");
-
-                ((TextView) templateProg.findViewById(R.id.name)).setText(bd.getString("name"));
-                ((TextView) templateProg.findViewById(R.id.time)).setText(bd.getString("time"));
-                ((TextView) templateProg.findViewById(R.id.local)).setText(bd.getString("local"));
-                ((TextView) templateProg.findViewById(R.id.autor)).setText(bd.getString("autor"));
+                ((TextView) templateProg.findViewById(R.id.name)).setText(events.get(i).getName());
+                ((TextView) templateProg.findViewById(R.id.time)).setText(events.get(i).getTime());
+                ((TextView) templateProg.findViewById(R.id.local)).setText("Me esqueci");
+                ((TextView) templateProg.findViewById(R.id.autor)).setText("esqueci tbm");
 
                 scroll.addView(templateProg);
             }
