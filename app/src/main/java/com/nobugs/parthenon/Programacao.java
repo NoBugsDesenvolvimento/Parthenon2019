@@ -2,6 +2,7 @@ package com.nobugs.parthenon;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,15 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -84,11 +94,12 @@ public class Programacao extends Fragment {
             RealmConfiguration config = new RealmConfiguration.Builder()
                     .deleteRealmIfMigrationNeeded()
                     .build();
-
             Realm realm = Realm.getInstance(config);
             RealmResults<Event> events = realm.where(Event.class).findAll();
 
+
             int count = events.size();
+            Log.v("rgk", count+"");
             for (int i = 0; i < count; i++) {
                 CardView templateProg = (CardView) inflater.inflate(R.layout.prog_template, scroll, false);
 

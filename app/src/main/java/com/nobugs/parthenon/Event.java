@@ -5,7 +5,6 @@ import io.realm.annotations.PrimaryKey;
 
 public class Event extends RealmObject {
 
-
     @PrimaryKey
     private int id;
 
@@ -13,10 +12,7 @@ public class Event extends RealmObject {
     private String date;
     private String time;
     private int type;
-
     private String summary;
-
-    private Presenter author;
 
     public Event(){
         id = 1;
@@ -26,7 +22,7 @@ public class Event extends RealmObject {
         type = 1;
         summary = "nome";
     }
-    public Event(int id, String name, String date, String time, int type, String summary, Presenter author) {
+    public Event(int id, String name, String date, String time, int type, String summary) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -34,6 +30,15 @@ public class Event extends RealmObject {
         this.type = type;
         this.summary = summary;
         //this.author = author;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -74,14 +79,6 @@ public class Event extends RealmObject {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public Presenter getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Presenter author) {
-        this.author = author;
     }
 
 }

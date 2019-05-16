@@ -16,13 +16,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends FragmentActivity {
-    private FirebaseUser user;
     private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        //mAuth.getInstance().signOut();
         setContentView(R.layout.login);
     }
 
@@ -45,8 +45,9 @@ public class Login extends FragmentActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            user = mAuth.getCurrentUser();
-                            Log.v("rgk", "deu");
+                            Intent it = new Intent(getBaseContext(), NavigationScreen.class);
+                            startActivity(it);
+                            finish();
                         } else {
                             Log.v("rgk", "n deu");
                         }

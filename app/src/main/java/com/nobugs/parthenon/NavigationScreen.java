@@ -12,15 +12,9 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
+import io.realm.internal.IOException;
 
 public class NavigationScreen extends FragmentActivity {
 
@@ -38,44 +36,11 @@ public class NavigationScreen extends FragmentActivity {
     private PagerAdapter pagerAdapter;
     private BottomNavigationView navView;
     private TabLayout tabs;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /*
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("teste");
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.v("rgk", "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.v("rgk", "Failed to read value.", error.toException());
-            }
-        });
-        */
-
-        /*realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                try {
-                    InputStream is = getAssets().open("Events.json");
-                    realm.createAllFromJson(Event.class, is);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });*/
 
         setContentView(R.layout.navigation_screen);
 
@@ -89,8 +54,48 @@ public class NavigationScreen extends FragmentActivity {
 
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(changeNavListener);
-    }
 
+        //Iniciar Realm
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(config);
+
+        //Banco de Dados
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Atividades");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                switch (dataSnapshot.getRef().getKey()){
+                    case "Atividades":
+                        GenericTypeIndicator<List<Event>> t = new GenericTypeIndicator<List<Event>>() {};
+                        List<Event> value = dataSnapshot.getValue(t);
+                        for (int i = 0; i < value.size(); i++){
+                            try{
+                                realm.beginTransaction();
+                                realm.copyToRealmOrUpdate(value.get(i));
+                                realm.commitTransaction();
+                            } catch (IOException e){
+                                Log.v("rgk", e.getMessage());
+                            }
+                        }
+
+                        break;
+                    case "qualquer outra merda":
+                        break;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+
+        RealmResults<Event> events = realm.where(Event.class).findAll();
+    }
 
 
     private TabLayout.OnTabSelectedListener changeTabListener = new TabLayout.OnTabSelectedListener(){
