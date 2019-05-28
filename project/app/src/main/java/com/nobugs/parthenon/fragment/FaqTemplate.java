@@ -1,4 +1,4 @@
-package com.nobugs.parthenon;
+package com.nobugs.parthenon.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.nobugs.parthenon.R;
 
 public class FaqTemplate extends Fragment {
     @Nullable

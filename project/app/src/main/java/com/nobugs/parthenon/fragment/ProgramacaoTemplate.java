@@ -1,4 +1,4 @@
-package com.nobugs.parthenon;
+package com.nobugs.parthenon.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import androidx.fragment.app.Fragment;
+
+import com.nobugs.parthenon.R;
 
 public class ProgramacaoTemplate extends Fragment {
 

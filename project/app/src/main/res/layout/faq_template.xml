@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:contentDescription="@string/question_content"
     android:orientation="vertical"
-    tools:context=".FaqTemplate">
+    tools:context=".fragment.FaqTemplate">
 
     <LinearLayout
         android:layout_width="match_parent"

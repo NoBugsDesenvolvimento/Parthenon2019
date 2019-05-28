@@ -1,4 +1,4 @@
-package com.nobugs.parthenon;
+package com.nobugs.parthenon.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

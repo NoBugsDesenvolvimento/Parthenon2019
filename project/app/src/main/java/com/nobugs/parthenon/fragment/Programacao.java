@@ -1,4 +1,4 @@
-package com.nobugs.parthenon;
+package com.nobugs.parthenon.fragment;
 
 import android.os.Bundle;
 
@@ -20,15 +20,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.nobugs.parthenon.R;
+import com.nobugs.parthenon.model.Event;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

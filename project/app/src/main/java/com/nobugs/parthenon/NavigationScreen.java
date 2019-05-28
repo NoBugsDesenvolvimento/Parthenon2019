@@ -21,6 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.nobugs.parthenon.fragment.Faq;
+import com.nobugs.parthenon.fragment.Profile;
+import com.nobugs.parthenon.fragment.Programacao;
+import com.nobugs.parthenon.model.Event;
 
 import java.util.List;
 

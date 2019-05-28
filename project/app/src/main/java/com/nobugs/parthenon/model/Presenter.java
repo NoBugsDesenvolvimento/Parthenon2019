@@ -1,4 +1,4 @@
-package com.nobugs.parthenon;
+package com.nobugs.parthenon.model;
 
 import android.provider.ContactsContract;
 
