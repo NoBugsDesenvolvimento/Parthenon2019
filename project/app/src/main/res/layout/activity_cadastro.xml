@@ -74,7 +74,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="Telefone"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
 
     <Button

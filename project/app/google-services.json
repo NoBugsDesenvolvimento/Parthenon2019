@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "934588727253",
-    "firebase_url": "https://parthenon-teste.firebaseio.com",
-    "project_id": "parthenon-teste",
-    "storage_bucket": "parthenon-teste.appspot.com"
+    "project_number": "943213813229",
+    "firebase_url": "https://parthenonzada.firebaseio.com",
+    "project_id": "parthenonzada",
+    "storage_bucket": "parthenonzada.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:934588727253:android:50913438d94179fd",
+        "mobilesdk_app_id": "1:943213813229:android:50913438d94179fd",
         "android_client_info": {
           "package_name": "com.nobugs.parthenon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "934588727253-9li46mqthlqso7438tclh28uiolt36tc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.nobugs.parthenon",
-            "certificate_hash": "259ea3c7aa983d90cbde229f431f1946b3d8a5be"
-          }
-        },
-        {
-          "client_id": "934588727253-vvolkm3asi0306e4vk7nr5clsrcuvvic.apps.googleusercontent.com",
+          "client_id": "943213813229-clvep2t5qm6iuqsrevrr7ie18nk8gj0t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCBog4Y8i1OvCvQujgM3d_I6JKOLf7dwzU"
+          "current_key": "AIzaSyBiJC58VZM9oWM2hGeytSwB-Aj83tCdYpo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "934588727253-vvolkm3asi0306e4vk7nr5clsrcuvvic.apps.googleusercontent.com",
+              "client_id": "943213813229-clvep2t5qm6iuqsrevrr7ie18nk8gj0t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -18,17 +18,25 @@ public class Usuario implements Serializable {
     private String nomePesquisa;
     private String CPF;
     private String nascimento;
+    private String telefone;
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public Usuario() {
     }
 
     public void salvar(){
-
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
         DatabaseReference usuariosRef = firebaseRef.child("usuarios").child( getId() );
         usuariosRef.setValue( this );
-
     }
+
 
     public void atualizar() {
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
@@ -47,6 +55,7 @@ public class Usuario implements Serializable {
         return usuarioMap;
     }
 
+    @Exclude
     public String getId() {
         return id;
     }

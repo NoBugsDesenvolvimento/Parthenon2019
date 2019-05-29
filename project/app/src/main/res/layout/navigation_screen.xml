@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".NavigationScreen"
+        tools:context=".activity.NavigationScreen"
         tools:layout_editor_absoluteX="10dp">
 
         <com.google.android.material.tabs.TabLayout
