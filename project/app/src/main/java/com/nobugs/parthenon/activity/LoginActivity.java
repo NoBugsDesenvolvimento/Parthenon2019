@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
-import com.nobugs.parthenon.model.Usuario;
+import com.nobugs.parthenon.model.Usuários.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 

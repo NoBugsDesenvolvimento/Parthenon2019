@@ -19,11 +19,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
-import com.nobugs.parthenon.helper.UsuarioFirebase;
-import com.nobugs.parthenon.model.Usuario;
-
-import java.util.Date;
-import java.util.UUID;
+import com.nobugs.parthenon.model.Usuários.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
 
