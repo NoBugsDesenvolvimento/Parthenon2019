@@ -7,7 +7,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-public class PerguntaAtividade extends RealmObject {
+public class PerguntaGeral extends RealmObject {
 
     @PrimaryKey
     private int id;
@@ -15,15 +15,15 @@ public class PerguntaAtividade extends RealmObject {
     private Pergunta perg;
     private int utilidade;
 
-    public PerguntaAtividade(){
+    public PerguntaGeral(){
 
     }
 
-    public PerguntaAtividade(String pergunta, String hora_p, String data_p) {
+    public PerguntaGeral(String pergunta, String hora_p, String data_p) {
         perg = new Pergunta(pergunta, hora_p, data_p);
     }
 
-    public PerguntaAtividade(String pergunta, Date hora_perg, Date data_perg) {
+    public PerguntaGeral(String pergunta, Date hora_perg, Date data_perg) {
         perg = new Pergunta(pergunta, hora_perg, data_perg);
     }
 

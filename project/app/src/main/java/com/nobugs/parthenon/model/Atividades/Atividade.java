@@ -26,11 +26,12 @@ public class Atividade extends RealmObject {
     private Date hora_final;
 
     private int vagas;
+    private AtividadeCategoria categoria;
 
     /* Constructor */
     public Atividade(){ }
 
-    public Atividade(String titulo, String sumario, int tipo, String local, String data, String hora_i, String hora_f, int vagas) {
+    public Atividade(String titulo, String sumario, int tipo, String local, String data, String hora_i, String hora_f, int vagas, String categoria) {
 
         this.titulo = titulo;
         this.sumario = sumario;
@@ -62,6 +63,8 @@ public class Atividade extends RealmObject {
         }
 
         this.vagas = vagas;
+
+        /*tenho que procurar a categoria aqui, kk jota*/
     }
 
 
@@ -98,6 +101,9 @@ public class Atividade extends RealmObject {
         return vagas;
     }
 
+    public AtividadeCategoria getCategoria() {
+        return categoria;
+    }
 
     /* Setters */
     public void setTitulo(String titulo) {
@@ -157,5 +163,10 @@ public class Atividade extends RealmObject {
 
     public void setVagas(int vagas) {
         this.vagas = vagas;
+    }
+
+    public void setCategoria(AtividadeCategoria categoria) {
+        this.categoria = categoria;
+        /*tenho que procurar a categoria aqui, kk jota*/
     }
 }
