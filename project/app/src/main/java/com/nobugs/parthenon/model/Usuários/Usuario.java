@@ -1,4 +1,4 @@
-package com.nobugs.parthenon.model;
+package com.nobugs.parthenon.model.Usuários;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;

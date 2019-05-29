@@ -10,7 +10,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.nobugs.parthenon.model.Usuario;
+import com.nobugs.parthenon.model.Usuários.Usuario;
 
 public class UsuarioFirebase {
 

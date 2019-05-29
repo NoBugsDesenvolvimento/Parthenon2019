@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.getkeepsafe.relinker:relinker:1.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a7fff27de6793c078027545d479b442e/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a7fff27de6793c078027545d479b442e/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f42082051c10656beef3d2cf012efc11/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f42082051c10656beef3d2cf012efc11/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
