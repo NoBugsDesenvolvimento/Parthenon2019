@@ -25,7 +25,6 @@ import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.fragment.Faq;
 import com.nobugs.parthenon.fragment.Profile;
 import com.nobugs.parthenon.fragment.Programacao;
-import com.nobugs.parthenon.model.Event;
 
 import java.util.List;
 

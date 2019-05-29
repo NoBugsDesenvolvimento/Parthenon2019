@@ -8,6 +8,41 @@ public class AtividadeCategoria extends RealmObject {
     @PrimaryKey
     private String nome;
     private String cor;
-    //private Imagem imagem;
+    private String icone;
+
+    /* Constructor */
+    public AtividadeCategoria(){ }
+
+    public AtividadeCategoria(String nome, String cor, String icone) {
+        this.nome = nome;
+        this.cor = cor;
+        this.icone = icone;
+    }
+
+    /* Getters */
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public String getIcone() {
+        return icone;
+    }
+
+    /* Setters */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public void setIcone(String icone) {
+        this.icone = icone;
+    }
 
 }

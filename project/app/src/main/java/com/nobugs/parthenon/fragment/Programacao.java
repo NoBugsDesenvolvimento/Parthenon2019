@@ -21,7 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
-import com.nobugs.parthenon.model.Event;
+import com.nobugs.parthenon.model.Atividades.Atividade;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -88,7 +88,7 @@ public class Programacao extends Fragment {
                     .deleteRealmIfMigrationNeeded()
                     .build();
             Realm realm = Realm.getInstance(config);
-            RealmResults<Event> events = realm.where(Event.class).findAll();
+            RealmResults<Atividade> events = realm.where(Atividade.class).findAll();
 
 
             int count = events.size();
@@ -96,8 +96,8 @@ public class Programacao extends Fragment {
             for (int i = 0; i < count; i++) {
                 CardView templateProg = (CardView) inflater.inflate(R.layout.prog_template, scroll, false);
 
-                ((TextView) templateProg.findViewById(R.id.name)).setText(events.get(i).getName());
-                ((TextView) templateProg.findViewById(R.id.time)).setText(events.get(i).getTime());
+                ((TextView) templateProg.findViewById(R.id.name)).setText(events.get(i).getTitulo());
+                ((TextView) templateProg.findViewById(R.id.time)).setText(events.get(i).getHoraI().toString());
                 ((TextView) templateProg.findViewById(R.id.local)).setText("Me esqueci");
                 ((TextView) templateProg.findViewById(R.id.autor)).setText("esqueci tbm");
 
