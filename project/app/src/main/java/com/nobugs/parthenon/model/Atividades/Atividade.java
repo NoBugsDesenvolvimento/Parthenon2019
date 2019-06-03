@@ -1,5 +1,7 @@
 package com.nobugs.parthenon.model.Atividades;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +20,7 @@ public class Atividade extends RealmObject {
 
     private int tipo;
     private String local;
-    //private PointMarker location;
+    private String latlng;
     @Required
     private Date data;
     @Required
@@ -26,17 +28,18 @@ public class Atividade extends RealmObject {
     private Date hora_final;
 
     private int vagas;
-    private AtividadeCategoria categoria;
+    private String categoria;
+    private AtividadeCategoria categoria2;
 
     /* Constructor */
     public Atividade(){ }
 
-    public Atividade(String titulo, String sumario, int tipo, String local, String data, String hora_i, String hora_f, int vagas, String categoria) {
+    public Atividade(String titulo, String sumario, int tipo, String local, String data, String hora_inicial, String hora_final, int vagas, String categoria, String latlng) {
 
         this.titulo = titulo;
         this.sumario = sumario;
         this.tipo = tipo;
-
+        this.latlng = latlng;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
             this.data = formatter.parse(data);
@@ -49,14 +52,14 @@ public class Atividade extends RealmObject {
 
         formatter = new SimpleDateFormat("hh:mm");
         try {
-            this.hora_inicial = formatter.parse(hora_i);
+            this.hora_inicial = formatter.parse(hora_inicial);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        if (hora_f != null) {
+        if (hora_final != null) {
             try {
-                this.hora_final = formatter.parse(hora_f);
+                this.hora_final = formatter.parse(hora_final);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -64,6 +67,7 @@ public class Atividade extends RealmObject {
 
         this.vagas = vagas;
 
+        this.categoria = categoria;
         /*tenho que procurar a categoria aqui, kk jota*/
     }
 
@@ -102,7 +106,7 @@ public class Atividade extends RealmObject {
     }
 
     public AtividadeCategoria getCategoria() {
-        return categoria;
+        return categoria2;
     }
 
     /* Setters */
@@ -166,7 +170,7 @@ public class Atividade extends RealmObject {
     }
 
     public void setCategoria(AtividadeCategoria categoria) {
-        this.categoria = categoria;
+        this.categoria2 = categoria;
         /*tenho que procurar a categoria aqui, kk jota*/
     }
 }

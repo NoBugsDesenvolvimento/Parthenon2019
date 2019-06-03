@@ -10,7 +10,7 @@ public class AtividadeCategoria extends RealmObject {
     private String cor;
     private String icone;
 
-    /* Constructor */
+    /* Constructors */
     public AtividadeCategoria(){ }
 
     public AtividadeCategoria(String nome, String cor, String icone) {

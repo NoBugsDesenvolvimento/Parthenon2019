@@ -25,6 +25,7 @@ import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.fragment.Faq;
 import com.nobugs.parthenon.fragment.Profile;
 import com.nobugs.parthenon.fragment.Programacao;
+import com.nobugs.parthenon.model.Atividades.Atividade;
 
 import java.util.List;
 
@@ -60,24 +61,26 @@ public class NavigationScreen extends FragmentActivity {
         navView.setOnNavigationItemSelectedListener(changeNavListener);
 
         //Iniciar Realm
-       /* Realm.init(this);
+        Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(config);
 
+
         //Banco de Dados
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Atividades");
+        DatabaseReference myRef = database.getReference("atividades");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 switch (dataSnapshot.getRef().getKey()){
-                    case "Atividades":
-                        GenericTypeIndicator<List<Event>> t = new GenericTypeIndicator<List<Event>>() {};
-                        List<Event> value = dataSnapshot.getValue(t);
+                    case "atividades":
+                        GenericTypeIndicator<List<Atividade>> t = new GenericTypeIndicator<List<Atividade>>() {};
+                        List<Atividade> value = dataSnapshot.getValue(t);
                         for (int i = 0; i < value.size(); i++){
                             try{
+                                Log.v("rgk", i+"fogo");
                                 realm.beginTransaction();
                                 realm.copyToRealmOrUpdate(value.get(i));
                                 realm.commitTransaction();
@@ -98,7 +101,7 @@ public class NavigationScreen extends FragmentActivity {
             }
         });
 
-        RealmResults<Event> events = realm.where(Event.class).findAll(); */
+        RealmResults<Atividade> events = realm.where(Atividade.class).findAll();
     }
 
 
