@@ -23,21 +23,54 @@ import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.model.Atividades.Atividade;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Vector;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 
 public class Programacao extends Fragment {
-    private static final int NUM_PAGES = 4;
-    DateSlidePagerAdapter dateCollection;
+    private int num_pages;
+    private DateSlidePagerAdapter dateCollection;
     private ViewPager viewPager;
+    private Set<Date> datesAux;
+    private static Vector<String> dates;
+    private static RealmResults<Atividade> atividades;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         final ViewGroup rootView = (ViewGroup) getLayoutInflater().inflate(R.layout.programacao, container, false);
+
+        Realm.init(getContext());
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm realm = Realm.getInstance(config);
+        atividades = realm.where(Atividade.class).findAll();
+
+        datesAux = new TreeSet<>();
+        int count = atividades.size();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        for (int i = 0; i < count; i++) {
+            try {
+                datesAux.add(formatter.parse(atividades.get(i).getData()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        dates = new Vector<>();
+        for (Date date : datesAux) dates.add(formatter.format(date).substring(0, 5));
+        num_pages = dates.size();
 
         return rootView;
     }
@@ -59,17 +92,20 @@ public class Programacao extends Fragment {
         @Override
         public Fragment getItem(int position) {
             Fragment fragment = new DayFragment();
+            Bundle bd = new Bundle();
+            bd.putInt("tab", position);
+            fragment.setArguments(bd);
             return fragment;
         }
 
         @Override
         public int getCount() {
-            return NUM_PAGES;
+            return num_pages;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "0"+(position+1)+"/05";
+            return dates.get(position);
         }
 
     }
@@ -83,22 +119,15 @@ public class Programacao extends Fragment {
 
             LinearLayout scroll = rootView.findViewById(R.id.date);
 
-            Realm.init(getContext());
-            RealmConfiguration config = new RealmConfiguration.Builder()
-                    .deleteRealmIfMigrationNeeded()
-                    .build();
-            Realm realm = Realm.getInstance(config);
-            RealmResults<Atividade> events = realm.where(Atividade.class).findAll();
-
-
-            int count = events.size();
-            Log.v("rgk", count+"");
+            Bundle args = getArguments();
+            RealmResults<Atividade> atividadesData = atividades.where().contains("data", dates.get(args.getInt("tab"))).findAll();
+            int count = atividadesData.size();
             for (int i = 0; i < count; i++) {
                 CardView templateProg = (CardView) inflater.inflate(R.layout.prog_template, scroll, false);
 
-                ((TextView) templateProg.findViewById(R.id.name)).setText(events.get(i).getTitulo());
-                ((TextView) templateProg.findViewById(R.id.time)).setText(events.get(i).getHoraI().toString());
-                ((TextView) templateProg.findViewById(R.id.local)).setText("Me esqueci");
+                ((TextView) templateProg.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
+                ((TextView) templateProg.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());
+                ((TextView) templateProg.findViewById(R.id.local)).setText(atividadesData.get(i).getLocal());
                 ((TextView) templateProg.findViewById(R.id.autor)).setText("esqueci tbm");
 
                 scroll.addView(templateProg);

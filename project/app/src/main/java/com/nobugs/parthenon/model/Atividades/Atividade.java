@@ -2,7 +2,6 @@ package com.nobugs.parthenon.model.Atividades;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -22,14 +21,13 @@ public class Atividade extends RealmObject {
     private String local;
     private String latlng;
     @Required
-    private Date data;
+    private String data;
     @Required
-    private Date hora_inicial;
-    private Date hora_final;
+    private String hora_inicial;
+    private String hora_final;
 
     private int vagas;
     private String categoria;
-    private AtividadeCategoria categoria2;
 
     /* Constructor */
     public Atividade(){ }
@@ -40,35 +38,18 @@ public class Atividade extends RealmObject {
         this.sumario = sumario;
         this.tipo = tipo;
         this.latlng = latlng;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            this.data = formatter.parse(data);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+        this.data = data;
 
         if (local != null)
             this.local = local;
 
-        formatter = new SimpleDateFormat("hh:mm");
-        try {
-            this.hora_inicial = formatter.parse(hora_inicial);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        if (hora_final != null) {
-            try {
-                this.hora_final = formatter.parse(hora_final);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+        this.hora_inicial = hora_inicial;
+        this.hora_final = hora_final;
 
         this.vagas = vagas;
 
         this.categoria = categoria;
-        /*tenho que procurar a categoria aqui, kk jota*/
     }
 
 
@@ -89,15 +70,15 @@ public class Atividade extends RealmObject {
         return local;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public Date getHoraI() {
+    public String getHora_inicial() {
         return hora_inicial;
     }
 
-    public Date getHoraF() {
+    public String getHora_final() {
         return hora_final;
     }
 
@@ -105,8 +86,12 @@ public class Atividade extends RealmObject {
         return vagas;
     }
 
-    public AtividadeCategoria getCategoria() {
-        return categoria2;
+    public String getLatlng() {
+        return latlng;
+    }
+
+    public String getCategoria() {
+        return categoria;
     }
 
     /* Setters */
@@ -126,51 +111,28 @@ public class Atividade extends RealmObject {
         this.local = local;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public void setData(String data) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            setData(formatter.parse(data));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void setHora_inicial(String hora_inicial) {
+        this.hora_inicial = hora_inicial;
     }
 
-    public void setHoraI(Date hora_i) {
-        this.hora_inicial = hora_i;
-    }
-
-    public void setHoraI(String hora_i) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            setHoraI(formatter.parse(hora_i));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setHoraF(Date hora_f) {
-        this.hora_final = hora_f;
-    }
-
-    public void setHoraF(String hora_f) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            setHoraF(formatter.parse(hora_f));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void setHora_final(String hora_final) {
+        this.hora_final = hora_final;
     }
 
     public void setVagas(int vagas) {
         this.vagas = vagas;
     }
 
-    public void setCategoria(AtividadeCategoria categoria) {
-        this.categoria2 = categoria;
-        /*tenho que procurar a categoria aqui, kk jota*/
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
+
+    public void setLatlng(String latlng) {
+        this.latlng = latlng;
+    }
+
 }

@@ -80,7 +80,6 @@ public class NavigationScreen extends FragmentActivity {
                         List<Atividade> value = dataSnapshot.getValue(t);
                         for (int i = 0; i < value.size(); i++){
                             try{
-                                Log.v("rgk", i+"fogo");
                                 realm.beginTransaction();
                                 realm.copyToRealmOrUpdate(value.get(i));
                                 realm.commitTransaction();
@@ -100,8 +99,6 @@ public class NavigationScreen extends FragmentActivity {
                 // Failed to read value
             }
         });
-
-        RealmResults<Atividade> events = realm.where(Atividade.class).findAll();
     }
 
 
