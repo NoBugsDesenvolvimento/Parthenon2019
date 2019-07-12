@@ -66,4 +66,7 @@
 
     <string name="base">Usar base 8 IGFJAHSJ,K</string>
     <string name="version">v 0.0.1.0</string>
+    <string name="title_activity_maps">map</string>
+
+    <string name="default_notification_channel_id">fcm_default_channel</string>
 </resources>
