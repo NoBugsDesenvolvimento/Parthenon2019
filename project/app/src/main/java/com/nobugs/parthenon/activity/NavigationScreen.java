@@ -10,29 +10,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.fragment.Faq;
 import com.nobugs.parthenon.fragment.Profile;
 import com.nobugs.parthenon.fragment.Programacao;
-import com.nobugs.parthenon.model.Atividades.Atividade;
-
-import java.util.List;
-
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
-import io.realm.internal.IOException;
+import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
+import com.nobugs.parthenon.helper.RealmHelper;
 
 public class NavigationScreen extends FragmentActivity {
 
@@ -41,7 +28,6 @@ public class NavigationScreen extends FragmentActivity {
     private PagerAdapter pagerAdapter;
     private BottomNavigationView navView;
     private TabLayout tabs;
-    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,45 +46,8 @@ public class NavigationScreen extends FragmentActivity {
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(changeNavListener);
 
-        //Iniciar Realm
-        Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(config);
-
-
-        //Banco de Dados
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("atividades");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                switch (dataSnapshot.getRef().getKey()){
-                    case "atividades":
-                        GenericTypeIndicator<List<Atividade>> t = new GenericTypeIndicator<List<Atividade>>() {};
-                        List<Atividade> value = dataSnapshot.getValue(t);
-                        for (int i = 0; i < value.size(); i++){
-                            try{
-                                realm.beginTransaction();
-                                realm.copyToRealmOrUpdate(value.get(i));
-                                realm.commitTransaction();
-                            } catch (IOException e){
-                                Log.v("rgk", e.getMessage());
-                            }
-                        }
-
-                        break;
-                    case "qualquer outra merda":
-                        break;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
+        // Chamar na Activity inicial
+        //ConfiguracaoFirebase.updateValues("atividades", this);
     }
 
 

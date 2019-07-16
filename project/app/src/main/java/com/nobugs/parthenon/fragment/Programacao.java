@@ -20,8 +20,12 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.nobugs.parthenon.R;
+import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 import com.nobugs.parthenon.model.Atividades.Atividade;
+import com.nobugs.parthenon.model.Atividades.AtividadesAux;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,6 +65,10 @@ public class Programacao extends Fragment {
         int count = atividades.size();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         for (int i = 0; i < count; i++) {
+            FirebaseDatabase database = ConfiguracaoFirebase.getDatabase();
+            DatabaseReference myRef = database.getReference("atividades").push();
+            AtividadesAux atv = new AtividadesAux(atividades.get(i));
+            myRef.setValue(atv);
             try {
                 datesAux.add(formatter.parse(atividades.get(i).getData()));
             } catch (ParseException e) {
@@ -113,17 +121,16 @@ public class Programacao extends Fragment {
     public static class DayFragment extends Fragment {
 
         @Override
-        public View onCreateView(LayoutInflater inflater,
-                                 ViewGroup container, Bundle savedInstanceState) {
-            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.days, container, false);
-
-            LinearLayout scroll = rootView.findViewById(R.id.date);
+        public void onResume() {
+            super.onResume();
+            LinearLayout scroll = getView().findViewById(R.id.date);
+            scroll.removeAllViews();
 
             Bundle args = getArguments();
             RealmResults<Atividade> atividadesData = atividades.where().contains("data", dates.get(args.getInt("tab"))).findAll();
             int count = atividadesData.size();
             for (int i = 0; i < count; i++) {
-                CardView templateProg = (CardView) inflater.inflate(R.layout.prog_template, scroll, false);
+                CardView templateProg = (CardView) getLayoutInflater().inflate(R.layout.prog_template, scroll, false);
 
                 ((TextView) templateProg.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
                 ((TextView) templateProg.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());
@@ -132,6 +139,12 @@ public class Programacao extends Fragment {
 
                 scroll.addView(templateProg);
             }
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater,
+                                 ViewGroup container, Bundle savedInstanceState) {
+            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.days, container, false);
 
             return rootView;
         }
