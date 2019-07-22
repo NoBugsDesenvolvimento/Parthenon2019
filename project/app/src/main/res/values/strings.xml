@@ -69,4 +69,7 @@
     <string name="title_activity_maps">map</string>
 
     <string name="default_notification_channel_id">fcm_default_channel</string>
+
+    <string name="inscricao_placeholder_1">Você ainda não selecionou as atividades que gostaria de participar.</string>
+    <string name="inscricao_bt_1">Escolher Atividades</string>
 </resources>

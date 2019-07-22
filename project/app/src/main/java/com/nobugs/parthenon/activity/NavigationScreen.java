@@ -16,10 +16,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.fragment.Faq;
+import com.nobugs.parthenon.fragment.InscricaoHolder;
 import com.nobugs.parthenon.fragment.Profile;
 import com.nobugs.parthenon.fragment.Programacao;
-import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
-import com.nobugs.parthenon.helper.RealmHelper;
 
 public class NavigationScreen extends FragmentActivity {
 
@@ -121,9 +120,14 @@ public class NavigationScreen extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new Programacao();
+                    if (false) {
+                        return new Programacao();
+                    }else{
+                        return new InscricaoHolder();
+                    }
                 case 1:
-                    return new Faq();
+                    // Comentei porque tá dando um erro que não faço ideia
+                    //return new Faq();
                 case 2:
                     return new Profile();
                 case 3:
