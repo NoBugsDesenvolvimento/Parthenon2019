@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.nobugs.parthenon.model.Atividades.Atividade;
+import com.nobugs.parthenon.model.Atividades.AtividadesAux;
 
 import java.util.List;
 
@@ -57,17 +58,17 @@ public class ConfiguracaoFirebase {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 switch (dataSnapshot.getRef().getKey()){
                     case "atividades":
-                        RealmHelper.startTransaction();
-                        GenericTypeIndicator<List<Atividade>> t = new GenericTypeIndicator<List<Atividade>>() {};
-                        List<Atividade> value = dataSnapshot.getValue(t);
-                        for (int i = 0; i < value.size(); i++){
-                            try{
-                                realm.copyToRealmOrUpdate(value.get(i));
-                            } catch (IOException e){
+                        for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
+                            try {
+                                RealmHelper.startTransaction();
+                                AtividadesAux atvAux = dataValues.getValue(AtividadesAux.class);
+                                Atividade atv = new Atividade(atvAux, dataValues.getKey());
+                                realm.copyToRealmOrUpdate(atv);
+                                RealmHelper.endTransaction();
+                            } catch (IOException e) {
                                 Log.v("rgk", e.getMessage());
                             }
                         }
-                        RealmHelper.endTransaction();
                         break;
                     case "qualquer outra merda":
                         break;
@@ -77,7 +78,7 @@ public class ConfiguracaoFirebase {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
+                Log.v("rgk", "possivelmente deu erro");
             }
         });
     }

@@ -2,6 +2,7 @@ package com.nobugs.parthenon.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -10,15 +11,21 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 import com.nobugs.parthenon.helper.RealmHelper;
@@ -44,23 +51,36 @@ public class Inscrever extends AppCompatActivity {
     private Set<Date> datesAux;
     private static Vector<String> dates;
     private static RealmResults<Atividade> atividades;
+    private static long inscCount = 0;
+    private static String userKey = "fogogo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscrever);
 
-        Realm realm = RealmHelper.getRealm(this);
-        atividades = realm.where(Atividade.class).findAll();
+        final FirebaseDatabase db = ConfiguracaoFirebase.getDatabase();
+        final DatabaseReference myRef = db.getReference("inscricoes/" + userKey);
 
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                inscCount = dataSnapshot.getChildrenCount();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Realm realm = RealmHelper.getRealm(this);
+
+        atividades = realm.where(Atividade.class).findAll();
         datesAux = new TreeSet<>();
         int count = atividades.size();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         for (int i = 0; i < count; i++) {
-            FirebaseDatabase database = ConfiguracaoFirebase.getDatabase();
-            DatabaseReference myRef = database.getReference("atividades").push();
-            AtividadesAux atv = new AtividadesAux(atividades.get(i));
-            myRef.setValue(atv);
             try {
                 datesAux.add(formatter.parse(atividades.get(i).getData()));
             } catch (ParseException e) {
@@ -115,17 +135,82 @@ public class Inscrever extends AppCompatActivity {
             scroll.removeAllViews();
 
             Bundle args = getArguments();
-            RealmResults<Atividade> atividadesData = atividades.where().contains("data", dates.get(args.getInt("tab"))).findAll();
+            final RealmResults<Atividade> atividadesData = atividades.where().contains("data", dates.get(args.getInt("tab"))).findAll();
             int count = atividadesData.size();
             for (int i = 0; i < count; i++) {
-                CardView templateProg = (CardView) getLayoutInflater().inflate(R.layout.prog_template, scroll, false);
+                CardView templateInsc = (CardView) getLayoutInflater().inflate(R.layout.insc_template, scroll, false);
 
-                ((TextView) templateProg.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
-                ((TextView) templateProg.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());
-                ((TextView) templateProg.findViewById(R.id.local)).setText(atividadesData.get(i).getLocal());
-                ((TextView) templateProg.findViewById(R.id.autor)).setText("esqueci tbm");
+                ((TextView) templateInsc.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
+                ((TextView) templateInsc.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());
+                ((TextView) templateInsc.findViewById(R.id.local)).setText(atividadesData.get(i).getLocal());
+                ((TextView) templateInsc.findViewById(R.id.autor)).setText("esqueci tbm");
 
-                scroll.addView(templateProg);
+                final CheckBox insc = templateInsc.findViewById(R.id.inscrever);
+                final FirebaseDatabase db = ConfiguracaoFirebase.getDatabase();
+                final String atividadeKey = atividadesData.get(i).getKey();
+                final DatabaseReference myRef = db.getReference("inscricoes/" + userKey + "/" + atividadeKey);
+
+                insc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (b){
+                            if (inscCount < 5) {
+                                inscCount++;
+                                // 0 para indicar inscrito e 1 para confirmado
+                                myRef.setValue(0);
+                            }else{
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setMessage(R.string.limite_insc_text)
+                                        .setTitle(R.string.limite_insc_title);
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                                insc.setChecked(false);
+                            }
+                        }else{
+                            inscCount--;
+                            myRef.removeValue();
+                        }
+                    }
+                });
+
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()){
+                            insc.setOnCheckedChangeListener (null);
+                            insc.setChecked(true);
+                            insc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                                    if (b){
+                                        if (inscCount < 5) {
+                                            inscCount++;
+                                            // 0 para indicar inscrito e 1 para confirmado
+                                            myRef.setValue(0);
+                                        }else{
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                            builder.setMessage(R.string.limite_insc_text)
+                                                    .setTitle(R.string.limite_insc_title);
+                                            AlertDialog dialog = builder.create();
+                                            dialog.show();
+                                            insc.setChecked(false);
+                                        }
+                                    }else{
+                                        inscCount--;
+                                        myRef.removeValue();
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                scroll.addView(templateInsc);
             }
         }
 

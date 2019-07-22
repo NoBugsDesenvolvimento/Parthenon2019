@@ -19,6 +19,8 @@ import com.nobugs.parthenon.fragment.Faq;
 import com.nobugs.parthenon.fragment.InscricaoHolder;
 import com.nobugs.parthenon.fragment.Profile;
 import com.nobugs.parthenon.fragment.Programacao;
+import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
+import com.nobugs.parthenon.helper.RealmHelper;
 
 public class NavigationScreen extends FragmentActivity {
 
@@ -46,7 +48,7 @@ public class NavigationScreen extends FragmentActivity {
         navView.setOnNavigationItemSelectedListener(changeNavListener);
 
         // Chamar na Activity inicial
-        //ConfiguracaoFirebase.updateValues("atividades", this);
+        ConfiguracaoFirebase.updateValues("atividades", this);
     }
 
 
@@ -126,8 +128,7 @@ public class NavigationScreen extends FragmentActivity {
                         return new InscricaoHolder();
                     }
                 case 1:
-                    // Comentei porque tá dando um erro que não faço ideia
-                    //return new Faq();
+                    return new Faq();
                 case 2:
                     return new Profile();
                 case 3:

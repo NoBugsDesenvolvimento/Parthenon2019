@@ -30,6 +30,7 @@ public class RealmHelper {
     }
 
     public static void startTransaction(){
+
         if (realm != null) {
             realm.beginTransaction();
         }

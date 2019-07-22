@@ -22,19 +22,3 @@ public class Days extends Fragment {
         return rootView;
     }
 }
-
-
-/*
-
-    //Acho isso aqui meio bobo
-    /*@Override
-    public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
-            super.onBackPressed();
-        } else {
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-        }
-    }
-
-
-}*/

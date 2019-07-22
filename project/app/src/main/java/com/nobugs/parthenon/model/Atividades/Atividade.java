@@ -13,6 +13,9 @@ public class Atividade extends RealmObject {
 
     /* Attributes */
     @PrimaryKey
+    private String key;
+
+    @Required
     private String titulo;
     @Required
     private String sumario;
@@ -30,6 +33,21 @@ public class Atividade extends RealmObject {
     private String categoria;
 
     /* Constructor */
+
+    public Atividade(AtividadesAux atv, String key){
+        this.titulo = atv.getTitulo();
+        this.sumario = atv.getSumario();
+        this.tipo = atv.getTipo();
+        this.local = atv.getLocal();
+        this.latlng = atv.getLatlng();
+        this.data = atv.getData();
+        this.hora_inicial = atv.getHora_inicial();
+        this.hora_final = atv.getHora_final();
+        this.vagas = atv.getVagas();
+        this.categoria = atv.getCategoria();
+        this.key = key;
+    }
+
     public Atividade(){ }
 
     public Atividade(String titulo, String sumario, int tipo, String local, String data, String hora_inicial, String hora_final, int vagas, String categoria, String latlng) {
@@ -94,6 +112,10 @@ public class Atividade extends RealmObject {
         return categoria;
     }
 
+    public String getKey() {
+        return key;
+    }
+
     /* Setters */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -135,4 +157,7 @@ public class Atividade extends RealmObject {
         this.latlng = latlng;
     }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
 }
