@@ -19,6 +19,15 @@ public class Usuario implements Serializable {
     private String CPF;
     private String nascimento;
     private String telefone;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getTelefone() {
         return telefone;
