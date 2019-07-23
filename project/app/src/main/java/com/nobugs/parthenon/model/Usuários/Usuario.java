@@ -42,7 +42,7 @@ public class Usuario implements Serializable {
 
     public void salvar(){
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
-        DatabaseReference usuariosRef = firebaseRef.child("usuarios").child( getId() );
+        DatabaseReference usuariosRef = firebaseRef.child("usuarios").child( getCPF() );
         usuariosRef.setValue( this );
     }
 

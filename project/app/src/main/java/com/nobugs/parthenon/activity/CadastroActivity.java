@@ -34,6 +34,15 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         inicializarComponentes();
+
+        Intent intent = getIntent();
+        String cpf = intent.getStringExtra("cpf");
+        editCPF.setText(cpf);
+
+        if(cpf == null){
+            Toast.makeText(this, "Da pra fazer como cê tá pensando", Toast.LENGTH_SHORT).show();
+        }
+
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,13 +136,7 @@ public class CadastroActivity extends AppCompatActivity {
                             usuario.setNomePesquisa(nome.toUpperCase());
                             usuario.setEmail( email );
                             usuario.setSenha( senha );
-
-                            Usuario usuario = new Usuario();
-                            usuario.setNome( nome );
-                            usuario.setEmail( email );
-                            usuario.setSenha( senha );
                             usuario.setCPF(cpf);
-                            usuario.setNomePesquisa(nome.toUpperCase());
                             usuario.setNascimento(nascimento);
 
                             if(telefone != null){ usuario.setTelefone(telefone); } //Termina cadastro de atributos do usuario e salva o telefone se ele estiver preenchido
