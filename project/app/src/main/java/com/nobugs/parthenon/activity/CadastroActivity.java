@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 import com.nobugs.parthenon.model.Usuários.Usuario;
@@ -66,7 +68,7 @@ public class CadastroActivity extends AppCompatActivity {
         editCPF.requestFocus();
     }
 
-    public void cadastrarUsuario(final Usuario usuario) {
+    public void cadastrarUsuario(final Usuario usuario, final String cpf) {
         autenticar = ConfiguracaoFirebase.getFirebaseAutenticacao();
       autenticar.createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
           @Override
@@ -82,6 +84,11 @@ public class CadastroActivity extends AppCompatActivity {
                       usuario.salvar();
 
                       Toast.makeText(CadastroActivity.this, "Cadastro com sucesso", Toast.LENGTH_SHORT).show();
+
+                      if(cpf != null){
+                          DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
+                          referencia.setValue("1");
+                      }
 
                       startActivity( new Intent(getApplicationContext(), NavigationScreen.class));
                       finish();
@@ -141,7 +148,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                             if(telefone != null){ usuario.setTelefone(telefone); } //Termina cadastro de atributos do usuario e salva o telefone se ele estiver preenchido
                              // salva no banco de dados
-                            cadastrarUsuario( usuario ); // chama o método de caadastro
+                            cadastrarUsuario( usuario, cpf ); // chama o método de caadastro
                         }//fecha o if de cadastro
                         else{ Toast.makeText(this, "Insira uma senha válida.", Toast.LENGTH_SHORT).show(); } //senha vazia
 
