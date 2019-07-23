@@ -1,7 +1,6 @@
 package com.nobugs.parthenon.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ public class FaqTemplate extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.faq_template, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.template_faq, container, false);
 
         return rootView;
     }

@@ -1,6 +1,5 @@
 package com.nobugs.parthenon.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,7 +27,7 @@ public class Faq extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              final ViewGroup container,
                              Bundle savedInstanceState) {
-        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.faq, container, false);
+        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_faq, container, false);
 
         search = rootView.findViewById(R.id.search_question);
 
@@ -39,7 +38,7 @@ public class Faq extends Fragment {
         int total = questions.length;
 
         for (int i = 0; i < total; i++) {
-            FrameLayout templateFaq = (FrameLayout) getLayoutInflater().inflate(R.layout.faq_template, scroll, false);
+            FrameLayout templateFaq = (FrameLayout) getLayoutInflater().inflate(R.layout.template_faq, scroll, false);
             ((TextView) templateFaq.findViewById(R.id.question_template)).setText(questions[i]);
 
             final Bundle bd = new Bundle();

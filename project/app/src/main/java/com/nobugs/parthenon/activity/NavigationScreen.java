@@ -15,12 +15,12 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
+import com.nobugs.parthenon.fragment.Duvidas;
 import com.nobugs.parthenon.fragment.Faq;
 import com.nobugs.parthenon.fragment.InscricaoHolder;
 import com.nobugs.parthenon.fragment.Profile;
 import com.nobugs.parthenon.fragment.Programacao;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
-import com.nobugs.parthenon.helper.RealmHelper;
 
 public class NavigationScreen extends FragmentActivity {
 
@@ -34,7 +34,7 @@ public class NavigationScreen extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.navigation_screen);
+        setContentView(R.layout.activity_navigation_screen);
 
         viewPager = findViewById(R.id.screenPager);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
@@ -130,7 +130,7 @@ public class NavigationScreen extends FragmentActivity {
                 case 1:
                     return new Faq();
                 case 2:
-                    return new Profile();
+                    return new Duvidas();
                 case 3:
                     return new Profile();
             }

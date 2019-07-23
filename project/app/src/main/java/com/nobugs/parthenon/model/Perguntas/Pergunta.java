@@ -1,9 +1,5 @@
 package com.nobugs.parthenon.model.Perguntas;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -11,46 +7,47 @@ import io.realm.annotations.Required;
 public class Pergunta extends RealmObject {
 
     @PrimaryKey
-    private int id;
+    private String key;
     @Required
     private String pergunta;
     private String resposta;
     @Required
-    private Date hora_perg;
-    private Date hora_resp;
+    private String hora_perg;
+    private String hora_resp;
     @Required
-    private Date data_perg;
-    private Date data_resp;
+    private String data_perg;
+    private String data_resp;
 
     /* Constructor */
+
+    public Pergunta(PerguntaAux perg, String key) {
+        this.key = key;
+
+        this.pergunta = perg.getPergunta();
+        if (perg.getResposta() != null) {
+            this.resposta = perg.getResposta();
+        }
+
+        this.hora_perg = perg.getHora_perg();
+        if (perg.getHora_resp() != null) {
+            this.hora_resp = perg.getHora_resp();
+        }
+
+        this.data_perg = perg.getData_perg();
+        if (perg.getData_resp() != null) {
+            this.data_resp = perg.getData_resp();
+        }
+    }
+
     public Pergunta() {
     }
 
-    public Pergunta(String pergunta, String hora_p, String data_p) {
-        this.pergunta = pergunta;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            this.data_perg = formatter.parse(data_p);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        formatter = new SimpleDateFormat("hh:mm");
-        try {
-            this.hora_perg = formatter.parse(hora_p);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Pergunta(String pergunta, Date hora_perg, Date data_perg) {
-        this.pergunta = pergunta;
-        this.hora_perg = hora_perg;
-        this.data_perg = data_perg;
-    }
-
     /* Getters */
+
+    public String getKey() {
+        return key;
+    }
+
     public String getPergunta() {
         return pergunta;
     }
@@ -59,23 +56,28 @@ public class Pergunta extends RealmObject {
         return resposta;
     }
 
-    public Date getHoraP() {
+    public String getHora_perg() {
         return hora_perg;
     }
 
-    public Date getHoraR() {
+    public String getHora_resp() {
         return hora_resp;
     }
 
-    public Date getDataP() {
+    public String getData_perg() {
         return data_perg;
     }
 
-    public Date getDataR() {
+    public String getData_resp() {
         return data_resp;
     }
 
     /* Setters */
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public void setPergunta(String pergunta) {
         this.pergunta = pergunta;
     }
@@ -84,55 +86,19 @@ public class Pergunta extends RealmObject {
         this.resposta = resposta;
     }
 
-    public void setHoraP(Date hora_p) {
-        this.hora_perg = hora_p;
+    public void setHora_perg(String hora_perg) {
+        this.hora_perg = hora_perg;
     }
 
-    public void setHoraP(String hora_p) {
-        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
-        try {
-            this.hora_perg = formatter.parse(hora_p);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void setHora_resp(String hora_resp) {
+        this.hora_resp = hora_resp;
     }
 
-    public void setHoraR(Date hora_r) {
-        this.hora_resp = hora_r;
+    public void setData_perg(String data_perg) {
+        this.data_perg = data_perg;
     }
 
-    public void setHoraR(String hora_r) {
-        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
-        try {
-            this.hora_resp = formatter.parse(hora_r);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setDataP(Date data_p) {
-        this.data_perg = data_p;
-    }
-
-    public void setDataP(String data_p) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            this.data_perg = formatter.parse(data_p);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setDataR(Date data_r) {
-        this.data_resp = data_r;
-    }
-
-    public void setDataR(String data_r) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            this.data_resp = formatter.parse(data_r);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void setData_resp(String data_resp) {
+        this.data_resp = data_resp;
     }
 }

@@ -2,7 +2,6 @@ package com.nobugs.parthenon.fragment;
 
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
+import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.model.Atividades.Atividade;
 import com.nobugs.parthenon.model.Atividades.AtividadesAux;
 
@@ -36,7 +36,6 @@ import java.util.Vector;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 
@@ -52,29 +51,10 @@ public class Programacao extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        final ViewGroup rootView = (ViewGroup) getLayoutInflater().inflate(R.layout.programacao, container, false);
-
-        Realm.init(getContext());
-        RealmConfiguration config = new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm realm = Realm.getInstance(config);
-        atividades = realm.where(Atividade.class).findAll();
+        final ViewGroup rootView = (ViewGroup) getLayoutInflater().inflate(R.layout.fragment_programacao, container, false);
 
         datesAux = new TreeSet<>();
-        int count = atividades.size();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        for (int i = 0; i < count; i++) {
-            FirebaseDatabase database = ConfiguracaoFirebase.getDatabase();
-            DatabaseReference myRef = database.getReference("atividades").push();
-            AtividadesAux atv = new AtividadesAux(atividades.get(i));
-            myRef.setValue(atv);
-            try {
-                datesAux.add(formatter.parse(atividades.get(i).getData()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
 
         dates = new Vector<>();
         for (Date date : datesAux) dates.add(formatter.format(date).substring(0, 5));
@@ -123,6 +103,10 @@ public class Programacao extends Fragment {
         @Override
         public void onResume() {
             super.onResume();
+
+            Realm realm = RealmHelper.getRealm(getContext());
+            atividades = realm.where(Atividade.class).findAll();
+
             LinearLayout scroll = getView().findViewById(R.id.date);
             scroll.removeAllViews();
 
@@ -130,7 +114,7 @@ public class Programacao extends Fragment {
             RealmResults<Atividade> atividadesData = atividades.where().contains("data", dates.get(args.getInt("tab"))).findAll();
             int count = atividadesData.size();
             for (int i = 0; i < count; i++) {
-                CardView templateProg = (CardView) getLayoutInflater().inflate(R.layout.prog_template, scroll, false);
+                CardView templateProg = (CardView) getLayoutInflater().inflate(R.layout.template_prog, scroll, false);
 
                 ((TextView) templateProg.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
                 ((TextView) templateProg.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());
