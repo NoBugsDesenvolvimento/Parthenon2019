@@ -15,9 +15,59 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         app:srcCompat="@drawable/cadastro" />
+
+    <RadioGroup
+        android:id="@+id/tipoCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <RadioButton
+            android:id="@+id/radioStaff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="revelarCodigo"
+            android:text="Staff"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/radioPalestrante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="revelarCodigo"
+            android:text="Palestrante"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/radioOrganizador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="revelarCodigo"
+            android:text="Organizador"
+            android:textColor="@android:color/white" />
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutValidar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/codigoValidar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Insira o código de validação"
+            android:visibility="visible" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
         android:id="@+id/editCpfCadastro"

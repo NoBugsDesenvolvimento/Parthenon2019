@@ -73,6 +73,10 @@
     <string name="inscricao_placeholder_1">Você ainda não selecionou as atividades que gostaria de participar.</string>
     <string name="inscricao_bt_1">Escolher Atividades</string>
 
+    <string name="key_staff">keystaff</string>
+    <string name="key_organizador">keyorganizador</string>
+    <string name="key_palestrante">keypalestrante</string>
+
     <string name="limite_insc_title">Limite de Inscrições</string>
     <string name="limite_insc_text">Você atingiu o limite de inscrições (10). Para se inscrever nesta atividade, remova sua inscrição de outra.</string>
 </resources>

@@ -19,13 +19,13 @@ public class Usuario implements Serializable {
     private String CPF;
     private String nascimento;
     private String telefone;
-    private int status;
+    private String status;
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

@@ -66,22 +66,30 @@ public class LoginActivity extends AppCompatActivity {
 
                         if(retorno.equals("0")){
                             Intent permitirCadastro = new Intent(LoginActivity.this, CadastroActivity.class).putExtra("cpf", cpfInserido);
-                            startActivity(permitirCadastro);
-                        }
-                        else{
+                            startActivity(permitirCadastro);    }
 
-                            if(retorno.equals("1")){
+                        else if(retorno.equals("3")){
+                            //Para staff, palestrantes ou organizadores. Tava dando erro no if aí tive que dividir
+                            //Separei o valor em 3 e 1 para facilitar visualização, mas da no mesmo.
+                            Intent permitirCadastro = new Intent(LoginActivity.this, CadastroActivity.class).putExtra("cpf", cpfInserido);
+                            startActivity(permitirCadastro);    }
+
+                        else if(retorno.equals("1" )){
                             Toast.makeText(LoginActivity.this, "O CPF já foi cadastrado.", Toast.LENGTH_SHORT).show();
                             logarUsuarioButton.setVisibility(View.VISIBLE);
                             senhaUsuarioLogin.setVisibility(View.VISIBLE);
                             logarUsuarioButton.setVisibility(View.VISIBLE);
                             verificarCPFbutton.setVisibility(View.GONE);    }
 
-                            else{ // Essa condição é para retorno 2, ou seja, código escolar. A diferença é que não carrega o cpf
+                        else if (retorno.equals("2")){
+                            // código escolar. A diferença é que não carrega o cpf
                                 Intent permitirCadastro = new Intent(LoginActivity.this, CadastroActivity.class);
-                                startActivity(permitirCadastro);
-                            }
+                                startActivity(permitirCadastro);    }
+                        else {
+                            //Se não teve retorno, filho, fecha essa activity
+                            finish();
                         }
+
 
 
                     }
@@ -166,13 +174,11 @@ public class LoginActivity extends AppCompatActivity {
     private void avisoEntrada() {
         //Cria o gerador do AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //define o titulo
         builder.setTitle("Em Rede: Conheça a UFV.");
-        //define a mensagem
+
         builder.setMessage("Apenas aqueles que cadastraram podem acessar esse aplicativo. Caso seu cpf não tenha sido cadastrado, " +
                 "o aplicativo será fechado.");
-        //define um botão como positivo
-        builder.setPositiveButton("Positivo", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 Toast.makeText(LoginActivity.this, "Seja bem vindo!", Toast.LENGTH_SHORT).show();
 
