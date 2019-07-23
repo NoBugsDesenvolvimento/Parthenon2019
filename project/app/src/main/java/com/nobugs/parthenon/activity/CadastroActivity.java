@@ -160,7 +160,7 @@ public class CadastroActivity extends AppCompatActivity {
                                 if (verificacao) {
                                     cadastrarUsuario(usuario, cpf);
                                 } else {
-                                    Toast.makeText(this, "a senha não bate", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Código de verificação inválido.", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 cadastrarUsuario(usuario, cpf);
