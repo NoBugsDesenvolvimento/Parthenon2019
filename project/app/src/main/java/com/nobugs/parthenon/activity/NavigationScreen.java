@@ -20,7 +20,6 @@ import com.nobugs.parthenon.fragment.InscricaoHolder;
 import com.nobugs.parthenon.fragment.Profile;
 import com.nobugs.parthenon.fragment.Programacao;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
-import com.nobugs.parthenon.helper.RealmHelper;
 
 public class NavigationScreen extends FragmentActivity {
 
@@ -34,7 +33,7 @@ public class NavigationScreen extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.navigation_screen);
+        setContentView(R.layout.activity_navigation_screen);
 
         viewPager = findViewById(R.id.screenPager);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());

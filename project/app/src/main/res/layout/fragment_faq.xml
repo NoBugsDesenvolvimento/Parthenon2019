@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.Faq">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_question"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@drawable/search_input"
+            android:drawableStart="@drawable/ic_search_24dp"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="7dp"
+            android:text="@string/search"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="@dimen/normal_font_size"
+            tools:ignore="LabelFor"
+            tools:targetApi="o" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/faq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+</LinearLayout>

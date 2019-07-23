@@ -1,11 +1,9 @@
 package com.nobugs.parthenon.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -19,7 +17,7 @@ public class ProgramacaoTemplate extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.prog_template, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.template_prog, container, false);
 
         return rootView;
     }

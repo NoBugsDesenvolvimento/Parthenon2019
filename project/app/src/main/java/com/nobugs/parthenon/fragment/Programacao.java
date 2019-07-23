@@ -2,7 +2,6 @@ package com.nobugs.parthenon.fragment;
 
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,6 @@ import java.util.Vector;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 
@@ -52,7 +50,7 @@ public class Programacao extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        final ViewGroup rootView = (ViewGroup) getLayoutInflater().inflate(R.layout.programacao, container, false);
+        final ViewGroup rootView = (ViewGroup) getLayoutInflater().inflate(R.layout.fragment_programacao, container, false);
 
         Realm.init(getContext());
         RealmConfiguration config = new RealmConfiguration.Builder()
@@ -130,7 +128,7 @@ public class Programacao extends Fragment {
             RealmResults<Atividade> atividadesData = atividades.where().contains("data", dates.get(args.getInt("tab"))).findAll();
             int count = atividadesData.size();
             for (int i = 0; i < count; i++) {
-                CardView templateProg = (CardView) getLayoutInflater().inflate(R.layout.prog_template, scroll, false);
+                CardView templateProg = (CardView) getLayoutInflater().inflate(R.layout.template_prog, scroll, false);
 
                 ((TextView) templateProg.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
                 ((TextView) templateProg.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());

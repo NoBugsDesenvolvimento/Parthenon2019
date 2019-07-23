@@ -1,7 +1,6 @@
 package com.nobugs.parthenon.activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -11,7 +10,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +28,6 @@ import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.model.Atividades.Atividade;
-import com.nobugs.parthenon.model.Atividades.AtividadesAux;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +37,6 @@ import java.util.TreeSet;
 import java.util.Vector;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 public class Inscrever extends AppCompatActivity {
@@ -138,7 +134,7 @@ public class Inscrever extends AppCompatActivity {
             final RealmResults<Atividade> atividadesData = atividades.where().contains("data", dates.get(args.getInt("tab"))).findAll();
             int count = atividadesData.size();
             for (int i = 0; i < count; i++) {
-                CardView templateInsc = (CardView) getLayoutInflater().inflate(R.layout.insc_template, scroll, false);
+                CardView templateInsc = (CardView) getLayoutInflater().inflate(R.layout.template_insc, scroll, false);
 
                 ((TextView) templateInsc.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
                 ((TextView) templateInsc.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());
