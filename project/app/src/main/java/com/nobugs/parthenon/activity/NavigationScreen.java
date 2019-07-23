@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
+import com.nobugs.parthenon.fragment.Duvidas;
 import com.nobugs.parthenon.fragment.Faq;
 import com.nobugs.parthenon.fragment.InscricaoHolder;
 import com.nobugs.parthenon.fragment.Profile;
@@ -129,7 +130,7 @@ public class NavigationScreen extends FragmentActivity {
                 case 1:
                     return new Faq();
                 case 2:
-                    return new Profile();
+                    return new Duvidas();
                 case 3:
                     return new Profile();
             }

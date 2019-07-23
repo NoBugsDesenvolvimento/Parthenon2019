@@ -12,6 +12,8 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.nobugs.parthenon.model.Atividades.Atividade;
 import com.nobugs.parthenon.model.Atividades.AtividadesAux;
+import com.nobugs.parthenon.model.Perguntas.Pergunta;
+import com.nobugs.parthenon.model.Perguntas.PerguntaAux;
 
 import java.util.List;
 
@@ -70,9 +72,19 @@ public class ConfiguracaoFirebase {
                             }
                         }
                         break;
-                    case "qualquer outra merda":
+                    case "perguntas":
+                        for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
+                            try {
+                                RealmHelper.startTransaction();
+                                PerguntaAux pergAux = dataValues.getValue(PerguntaAux.class);
+                                Pergunta perg = new Pergunta(pergAux, dataValues.getKey());
+                                realm.copyToRealmOrUpdate(perg);
+                                RealmHelper.endTransaction();
+                            } catch (IOException e) {
+                                Log.v("rgk", e.getMessage());
+                            }
+                        }
                         break;
-
                 }
             }
 

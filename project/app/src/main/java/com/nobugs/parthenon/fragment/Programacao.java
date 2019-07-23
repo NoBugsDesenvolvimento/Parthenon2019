@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
+import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.model.Atividades.Atividade;
 import com.nobugs.parthenon.model.Atividades.AtividadesAux;
 
@@ -52,27 +53,8 @@ public class Programacao extends Fragment {
                              Bundle savedInstanceState) {
         final ViewGroup rootView = (ViewGroup) getLayoutInflater().inflate(R.layout.fragment_programacao, container, false);
 
-        Realm.init(getContext());
-        RealmConfiguration config = new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm realm = Realm.getInstance(config);
-        atividades = realm.where(Atividade.class).findAll();
-
         datesAux = new TreeSet<>();
-        int count = atividades.size();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        for (int i = 0; i < count; i++) {
-            FirebaseDatabase database = ConfiguracaoFirebase.getDatabase();
-            DatabaseReference myRef = database.getReference("atividades").push();
-            AtividadesAux atv = new AtividadesAux(atividades.get(i));
-            myRef.setValue(atv);
-            try {
-                datesAux.add(formatter.parse(atividades.get(i).getData()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
 
         dates = new Vector<>();
         for (Date date : datesAux) dates.add(formatter.format(date).substring(0, 5));
@@ -121,6 +103,10 @@ public class Programacao extends Fragment {
         @Override
         public void onResume() {
             super.onResume();
+
+            Realm realm = RealmHelper.getRealm(getContext());
+            atividades = realm.where(Atividade.class).findAll();
+
             LinearLayout scroll = getView().findViewById(R.id.date);
             scroll.removeAllViews();
 
