@@ -12,7 +12,7 @@ public class Palestrante extends RealmObject {
 
     private String name;
     private String email;
-   // private ArrayList<Pair<String, String>> studies;
+    // private ArrayList<Pair<String, String>> studies;
     //private ArrayList<Pair<String, String>> jobs;
 
     public Palestrante() {

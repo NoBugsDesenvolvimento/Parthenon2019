@@ -79,4 +79,15 @@
 
     <string name="limite_insc_title">Limite de Inscrições</string>
     <string name="limite_insc_text">Você atingiu o limite de inscrições (10). Para se inscrever nesta atividade, remova sua inscrição de outra.</string>
+
+    <string name="lb_titulo">Título (nome) *</string>
+    <string name="lb_sumario">Sumário (descrição do conteúdo)</string>
+    <string name="lb_palestrante">Palestrante(s) *</string>
+    <string name="lb_local">Local *</string>
+    <string name="lb_vagas">Vagas</string>
+    <string name="lb_data">Data *</string>
+    <string name="lb_hora_i">Hora (início) *</string>
+    <string name="lb_hora_f">Hora (fim)</string>
+    <string name="empty"></string>
+
 </resources>
