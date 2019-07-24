@@ -90,4 +90,7 @@
     <string name="lb_hora_f">Hora (fim)</string>
     <string name="empty"></string>
 
+    <string name="title_erro_criacao">Preencha todos os campos obrigatórios</string>
+    <string name="title_confirma_criacao">Atividade criada com sucesso!</string>
+
 </resources>
