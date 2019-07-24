@@ -48,14 +48,15 @@ public class CadastroActivity extends AppCompatActivity {
         inicializarComponentes();
 
         Intent intent = getIntent();
-        final String cpf = intent.getStringExtra("cpf");
-        editCPF.setText(cpf);
+        final String cpfpassado = intent.getStringExtra("cpf");
+        if(!cpfpassado.equals("3")){
+        editCPF.setText(cpfpassado);}
 
 
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verificarCadastro();
+                verificarCadastro(cpfpassado);
             }
         });
 
@@ -119,7 +120,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
-    public void verificarCadastro() {
+    public void verificarCadastro(String codigo) {
 
         String cpf = editCPF.getText().toString();
         String nome = editNome.getText().toString();
@@ -141,30 +142,17 @@ public class CadastroActivity extends AppCompatActivity {
                             usuario.setCPF(cpf);
                             usuario.setStatus("Visitante");
                             usuario.setNascimento(nascimento);
+                            if(codigo.equals("3")){ usuario.setStatus("Organizador"); }
+
+
 
                             if (telefone != null) {
                                 usuario.setTelefone(telefone);
                             } //Termina cadastro de atributos do usuario e salva o telefone se ele estiver preenchido
                             // salva no banco de dados
 
-                            if (radioOrganizador.isChecked() || radioPalestrante.isChecked() || radioStaff.isChecked()) {
-                                if (radioOrganizador.isChecked()) {
-                                    usuario.setStatus("Organizador");
-                                } else if (radioStaff.isChecked()) {
-                                    usuario.setStatus("STAFF");
-                                } else {
-                                    usuario.setStatus("Palestrante");
-                                }
-
-                                boolean verificacao = verificarKey(codigoValidar.getText().toString());
-                                if (verificacao) {
-                                    cadastrarUsuario(usuario, cpf);
-                                } else {
-                                    Toast.makeText(this, "Código de verificação inválido.", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
                                 cadastrarUsuario(usuario, cpf);
-                            } // chama o método de caadastro
+                             // chama o método de caadastro
                         }//fecha o if de cadastro
                         else {
                             Toast.makeText(this, "Insira uma senha válida.", Toast.LENGTH_SHORT).show();
@@ -216,11 +204,6 @@ public class CadastroActivity extends AppCompatActivity {
         editTelefone = findViewById(R.id.editTelefoneCadastro);
         editSenha = findViewById(R.id.editSenhaCadastro);
         btnCadastro = findViewById(R.id.buttonCadastrar);
-        codigoValidar = findViewById(R.id.codigoValidar);
-        layoutValidar = findViewById(R.id.layoutValidar);
-        radioOrganizador = findViewById(R.id.radioOrganizador);
-        radioPalestrante = findViewById(R.id.radioPalestrante);
-        radioStaff = findViewById(R.id.radioStaff);
         editCPF.requestFocus();
     }
 
