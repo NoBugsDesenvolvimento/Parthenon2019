@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                         else if(retorno.equals("3")){
                             //Para staff, palestrantes ou organizadores. Tava dando erro no if aí tive que dividir
                             //Separei o valor em 3 e 1 para facilitar visualização, mas da no mesmo.
-                            Intent permitirCadastro = new Intent(LoginActivity.this, CadastroActivity.class).putExtra("cpf", cpfInserido);
+                            Intent permitirCadastro = new Intent(LoginActivity.this, CadastroActivity.class).putExtra("cpf", "3");
                             startActivity(permitirCadastro);    }
 
                         else if(retorno.equals("1" )){
