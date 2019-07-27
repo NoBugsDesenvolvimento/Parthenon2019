@@ -7,19 +7,19 @@
         android:title="@string/title_prog" />
 
     <item
-        android:id="@+id/nav_noticias_adm"
-        android:icon="@drawable/ic_news_24dp"
-        android:title="@string/title_noticias" />
-
-    <item
         android:id="@+id/nav_faq_adm"
         android:icon="@drawable/ic_help_24dp"
         android:title="@string/title_faq" />
 
     <item
-        android:id="@+id/nav_perfil_adm"
-        android:icon="@drawable/ic_account_24dp"
-        android:title="@string/title_profile" />
+        android:id="@+id/nav_noticias_adm"
+        android:icon="@drawable/ic_news_24dp"
+        android:title="@string/title_noticias" />
+
+    <item
+        android:id="@+id/nav_evento_adm"
+        android:icon="@drawable/ic_info_24dp"
+        android:title="@string/title_evento" />
 
 
 </menu>

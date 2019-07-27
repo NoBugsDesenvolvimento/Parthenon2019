@@ -10,15 +10,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.fragment.congressista.Duvidas;
-import com.nobugs.parthenon.fragment.congressista.Faq;
 import com.nobugs.parthenon.fragment.congressista.InscricaoHolder;
 import com.nobugs.parthenon.fragment.congressista.EventoInfo;
+import com.nobugs.parthenon.fragment.congressista.Noticias;
 import com.nobugs.parthenon.fragment.congressista.Programacao;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 
@@ -46,9 +47,6 @@ public class NavigationScreen extends FragmentActivity {
 
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(changeNavListener);
-
-        // Chamar na Activity inicial
-        ConfiguracaoFirebase.updateValues("atividades", this);
     }
 
 
@@ -60,13 +58,13 @@ public class NavigationScreen extends FragmentActivity {
                     navView.setSelectedItemId(R.id.nav_prog);
                     break;
                 case 1:
-                    navView.setSelectedItemId(R.id.nav_noticias);
-                    break;
-                case 2:
                     navView.setSelectedItemId(R.id.nav_faq);
                     break;
+                case 2:
+                    navView.setSelectedItemId(R.id.nav_noticias);
+                    break;
                 case 3:
-                    navView.setSelectedItemId(R.id.nav_perfil);
+                    navView.setSelectedItemId(R.id.nav_evento);
                     break;
             }
         }
@@ -89,12 +87,12 @@ public class NavigationScreen extends FragmentActivity {
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.nav_noticias:
-                    viewPager.setCurrentItem(1);
-                    return true;
-                case R.id.nav_faq:
                     viewPager.setCurrentItem(2);
                     return true;
-                case R.id.nav_perfil:
+                case R.id.nav_faq:
+                    viewPager.setCurrentItem(1);
+                    return true;
+                case R.id.nav_evento:
                     viewPager.setCurrentItem(3);
                     return true;
             }
@@ -122,19 +120,19 @@ public class NavigationScreen extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    if (false) {
+                    if (true) {
                         return new Programacao();
                     }else{
                         return new InscricaoHolder();
                     }
                 case 1:
-                    return new Faq();
-                case 2:
                     return new Duvidas();
+                case 2:
+                    return new Noticias();
                 case 3:
                     return new EventoInfo();
             }
-            return new Faq();
+            return null;
         }
 
         @Override

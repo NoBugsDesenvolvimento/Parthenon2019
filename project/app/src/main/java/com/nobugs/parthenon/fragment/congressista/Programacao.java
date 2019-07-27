@@ -2,6 +2,7 @@ package com.nobugs.parthenon.fragment.congressista;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,16 @@ public class Programacao extends Fragment {
         datesAux = new TreeSet<>();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
+        Realm realm = RealmHelper.getRealm(getContext());
+        atividades = realm.where(Atividade.class).findAll();
+        for (Atividade atv : atividades){
+            try {
+                datesAux.add(formatter.parse(atv.getData()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
         dates = new Vector<>();
         for (Date date : datesAux) dates.add(formatter.format(date).substring(0, 5));
         num_pages = dates.size();
@@ -103,9 +114,6 @@ public class Programacao extends Fragment {
         @Override
         public void onResume() {
             super.onResume();
-
-            Realm realm = RealmHelper.getRealm(getContext());
-            atividades = realm.where(Atividade.class).findAll();
 
             LinearLayout scroll = getView().findViewById(R.id.date);
             scroll.removeAllViews();

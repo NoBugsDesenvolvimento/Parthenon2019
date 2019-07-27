@@ -14,12 +14,10 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
-import com.nobugs.parthenon.fragment.EventoEditar;
-import com.nobugs.parthenon.fragment.organizador.CriarAtividade;
+import com.nobugs.parthenon.fragment.organizador.EnviarNoticias;
+import com.nobugs.parthenon.fragment.organizador.EventoEditar;
 import com.nobugs.parthenon.fragment.congressista.Duvidas;
-import com.nobugs.parthenon.fragment.congressista.Faq;
-import com.nobugs.parthenon.fragment.congressista.EventoInfo;
-import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
+import com.nobugs.parthenon.fragment.organizador.GerenciarAtividades;
 
 public class NavigationScreenAdmin extends FragmentActivity {
 
@@ -45,9 +43,6 @@ public class NavigationScreenAdmin extends FragmentActivity {
 
         navView = findViewById(R.id.nav_view_adm);
         navView.setOnNavigationItemSelectedListener(changeNavListener);
-
-        // Chamar na Activity inicial
-        ConfiguracaoFirebase.updateValues("evento", this);
     }
 
 
@@ -59,13 +54,13 @@ public class NavigationScreenAdmin extends FragmentActivity {
                     navView.setSelectedItemId(R.id.nav_prog_adm);
                     break;
                 case 1:
-                    navView.setSelectedItemId(R.id.nav_noticias_adm);
-                    break;
-                case 2:
                     navView.setSelectedItemId(R.id.nav_faq_adm);
                     break;
+                case 2:
+                    navView.setSelectedItemId(R.id.nav_noticias_adm);
+                    break;
                 case 3:
-                    navView.setSelectedItemId(R.id.nav_perfil_adm);
+                    navView.setSelectedItemId(R.id.nav_evento_adm);
                     break;
             }
         }
@@ -87,13 +82,13 @@ public class NavigationScreenAdmin extends FragmentActivity {
                 case R.id.nav_prog_adm:
                     viewPager.setCurrentItem(0);
                     return true;
-                case R.id.nav_noticias_adm:
+                case R.id.nav_faq_adm:
                     viewPager.setCurrentItem(1);
                     return true;
-                case R.id.nav_faq_adm:
+                case R.id.nav_noticias_adm:
                     viewPager.setCurrentItem(2);
                     return true;
-                case R.id.nav_perfil_adm:
+                case R.id.nav_evento_adm:
                     viewPager.setCurrentItem(3);
                     return true;
             }
@@ -121,15 +116,15 @@ public class NavigationScreenAdmin extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new CriarAtividade();
+                    return new GerenciarAtividades();
                 case 1:
-                    return new Faq();
-                case 2:
                     return new Duvidas();
+                case 2:
+                    return new EnviarNoticias();
                 case 3:
                     return new EventoEditar();
             }
-            return new Faq();
+            return null;
         }
 
         @Override

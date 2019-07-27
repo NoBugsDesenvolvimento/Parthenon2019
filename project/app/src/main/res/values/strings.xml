@@ -7,9 +7,9 @@
     <string name="app_name">Parthenon</string>
 
     <string name="title_prog">Programação</string>
-    <string name="title_profile">Evento</string>
+    <string name="title_faq">Dúvidas</string>
     <string name="title_noticias">Notícias</string>
-    <string name="title_faq">Perguntas Frequentes</string>
+    <string name="title_evento">Evento</string>
 
     <string-array name="ordenacoes">
         <item>Palestra</item>
@@ -32,29 +32,6 @@
     <string name="name_placeholder">Nome: </string>
     <string name="time_placeholder">Hora: </string>
     <string name="local_placeholder">Local: </string>
-
-    <string name="question_content">Question</string>
-    <string-array name="questions">
-        <item>zi Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ!</item>
-        <item>zi Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ!</item>
-        <item>ze Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ!</item>
-        <item>za Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ!</item>
-        <item>fo Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ!</item>
-        <item>fi Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ!</item>
-        <item>fe Padrão de Pergunta do FAQ!</item>
-        <item>fa Padrão de Pergunta do FAQ! Padrão de Pergunta do FAQ!</item>
-    </string-array>
-    <string-array name="answer">
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</item>
-    </string-array>
-
 
     <string name="base">Usar base 8 IGFJAHSJ,K</string>
     <string name="version">v 0.0.1.0</string>
@@ -96,5 +73,9 @@
 
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+
+    <string name="title_confirma_edicao">Tem certeza que deseja confirmar as alterações dos dados desta atividade?</string>
+    <string name="msg_confirma_edicao">Esta ação é irreversível.</string>
+    <string name="editado_sucesso">Alterações salvas com sucesso!</string>
 
 </resources>
