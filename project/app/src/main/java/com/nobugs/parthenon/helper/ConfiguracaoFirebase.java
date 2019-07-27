@@ -12,6 +12,8 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.nobugs.parthenon.model.Atividades.Atividade;
 import com.nobugs.parthenon.model.Atividades.AtividadesAux;
+import com.nobugs.parthenon.model.Evento;
+import com.nobugs.parthenon.model.EventoAux;
 import com.nobugs.parthenon.model.Perguntas.Pergunta;
 import com.nobugs.parthenon.model.Perguntas.PerguntaAux;
 
@@ -83,6 +85,17 @@ public class ConfiguracaoFirebase {
                             } catch (IOException e) {
                                 Log.v("rgk", e.getMessage());
                             }
+                        }
+                        break;
+                    case "evento":
+                        try {
+                            RealmHelper.startTransaction();
+                            EventoAux evtAux = dataSnapshot.getValue(EventoAux.class);
+                            Evento evt = new Evento(evtAux, dataSnapshot.getKey());
+                            realm.copyToRealmOrUpdate(evt);
+                            RealmHelper.endTransaction();
+                        } catch (IOException e) {
+                            Log.v("rgk", e.getMessage());
                         }
                         break;
                 }

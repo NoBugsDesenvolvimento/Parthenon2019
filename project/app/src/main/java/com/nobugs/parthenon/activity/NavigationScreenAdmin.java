@@ -1,7 +1,6 @@
 package com.nobugs.parthenon.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -15,12 +14,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
-import com.nobugs.parthenon.fragment.CriarAtividade;
-import com.nobugs.parthenon.fragment.Duvidas;
-import com.nobugs.parthenon.fragment.Faq;
-import com.nobugs.parthenon.fragment.InscricaoHolder;
-import com.nobugs.parthenon.fragment.Profile;
-import com.nobugs.parthenon.fragment.Programacao;
+import com.nobugs.parthenon.fragment.EventoEditar;
+import com.nobugs.parthenon.fragment.organizador.CriarAtividade;
+import com.nobugs.parthenon.fragment.congressista.Duvidas;
+import com.nobugs.parthenon.fragment.congressista.Faq;
+import com.nobugs.parthenon.fragment.congressista.EventoInfo;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 
 public class NavigationScreenAdmin extends FragmentActivity {
@@ -49,7 +47,7 @@ public class NavigationScreenAdmin extends FragmentActivity {
         navView.setOnNavigationItemSelectedListener(changeNavListener);
 
         // Chamar na Activity inicial
-        ConfiguracaoFirebase.updateValues("atividades", this);
+        ConfiguracaoFirebase.updateValues("evento", this);
     }
 
 
@@ -129,7 +127,7 @@ public class NavigationScreenAdmin extends FragmentActivity {
                 case 2:
                     return new Duvidas();
                 case 3:
-                    return new Profile();
+                    return new EventoEditar();
             }
             return new Faq();
         }

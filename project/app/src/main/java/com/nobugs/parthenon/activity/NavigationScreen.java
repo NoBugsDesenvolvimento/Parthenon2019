@@ -15,11 +15,11 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.nobugs.parthenon.R;
-import com.nobugs.parthenon.fragment.Duvidas;
-import com.nobugs.parthenon.fragment.Faq;
-import com.nobugs.parthenon.fragment.InscricaoHolder;
-import com.nobugs.parthenon.fragment.Profile;
-import com.nobugs.parthenon.fragment.Programacao;
+import com.nobugs.parthenon.fragment.congressista.Duvidas;
+import com.nobugs.parthenon.fragment.congressista.Faq;
+import com.nobugs.parthenon.fragment.congressista.InscricaoHolder;
+import com.nobugs.parthenon.fragment.congressista.EventoInfo;
+import com.nobugs.parthenon.fragment.congressista.Programacao;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 
 public class NavigationScreen extends FragmentActivity {
@@ -132,7 +132,7 @@ public class NavigationScreen extends FragmentActivity {
                 case 2:
                     return new Duvidas();
                 case 3:
-                    return new Profile();
+                    return new EventoInfo();
             }
             return new Faq();
         }
