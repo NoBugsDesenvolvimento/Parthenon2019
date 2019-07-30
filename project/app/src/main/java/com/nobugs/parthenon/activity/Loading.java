@@ -15,8 +15,6 @@ public class Loading extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
-        ConfiguracaoFirebase.updateValues("atividades", this);
-        ConfiguracaoFirebase.updateValues("evento", this);
     }
 
     public void go(View v){

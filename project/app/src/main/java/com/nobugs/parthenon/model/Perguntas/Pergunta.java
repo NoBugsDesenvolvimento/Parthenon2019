@@ -2,51 +2,76 @@ package com.nobugs.parthenon.model.Perguntas;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
 public class Pergunta extends RealmObject {
 
     @PrimaryKey
     private String key;
-    @Required
+
     private String pergunta;
     private String resposta;
-    @Required
+    private String email;
+    private String titulo;
+    private String respondida;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getRespondida() {
+        return respondida;
+    }
+
+    public void setRespondida(String respondida) {
+        this.respondida = respondida;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String CPF) {
+        this.email = CPF;
+    }
+
     private String hora_perg;
     private String hora_resp;
-    @Required
+
     private String data_perg;
     private String data_resp;
 
     /* Constructor */
 
-    public Pergunta(PerguntaAux perg, String key) {
-        this.key = key;
-
-        this.pergunta = perg.getPergunta();
-        if (perg.getResposta() != null) {
-            this.resposta = perg.getResposta();
-        }
-
-        this.hora_perg = perg.getHora_perg();
-        if (perg.getHora_resp() != null) {
-            this.hora_resp = perg.getHora_resp();
-        }
-
-        this.data_perg = perg.getData_perg();
-        if (perg.getData_resp() != null) {
-            this.data_resp = perg.getData_resp();
-        }
-    }
-
     public Pergunta() {
     }
 
-    /* Getters */
+    public Pergunta(PerguntaAux pgt, String key) {
+        this.pergunta = pgt.getPergunta();
+        this.resposta = pgt.getResposta();
+        this.email = pgt.getEmail();
+        this.titulo = pgt.getTitulo();
+        this.respondida = pgt.getRespondida();
+        this.hora_perg = pgt.getHora_perg();
+        this.hora_resp = pgt.getHora_resp();
+        this.data_perg = pgt.getData_perg();
+        this.data_resp = pgt.getData_resp();
 
-    public String getKey() {
-        return key;
+        this.key = key;
     }
+
+    /* Getters */
 
     public String getPergunta() {
         return pergunta;
@@ -73,10 +98,6 @@ public class Pergunta extends RealmObject {
     }
 
     /* Setters */
-
-    public void setKey(String key) {
-        this.key = key;
-    }
 
     public void setPergunta(String pergunta) {
         this.pergunta = pergunta;

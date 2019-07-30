@@ -29,7 +29,7 @@
             android:id="@+id/first_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="110dp"
+            android:layout_marginStart="100dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toEndOf="@id/imgContainer"
             app:layout_constraintTop_toTopOf="parent">

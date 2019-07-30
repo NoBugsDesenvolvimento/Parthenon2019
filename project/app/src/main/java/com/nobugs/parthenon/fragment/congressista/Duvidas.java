@@ -3,9 +3,11 @@ package com.nobugs.parthenon.fragment.congressista;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nobugs.parthenon.R;
+import com.nobugs.parthenon.activity.Duvida;
 import com.nobugs.parthenon.activity.MapsActivity;
 import com.nobugs.parthenon.activity.SubmitDuvidasActivity;
 import com.nobugs.parthenon.helper.RealmHelper;
@@ -61,23 +64,34 @@ public class Duvidas extends Fragment {
         Realm realm = RealmHelper.getRealm(getContext());
         perguntas = realm.where(Pergunta.class).findAll();
 
-        LinearLayout scroll = getView().findViewById(R.id.questions);
+        LinearLayout scroll = getView().findViewById(R.id.perguntas);
         scroll.removeAllViews();
 
         int count = perguntas.size();
+        Log.v("rgk", count+"");
         for (int i = 0; i < count; i++) {
-            /* Cria o coiso */
+            LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
 
-            /*
-            CardView templateProg = (CardView) getLayoutInflater().inflate(R.layout.template_prog, scroll, false);
+            Log.v("rgk", perguntas.get(i).getTitulo());
 
-            ((TextView) templateProg.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
-            ((TextView) templateProg.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());
-            ((TextView) templateProg.findViewById(R.id.local)).setText(atividadesData.get(i).getLocal());
-            ((TextView) templateProg.findViewById(R.id.autor)).setText("esqueci tbm");
+            ((TextView) templatePerg.findViewById(R.id.pergunta)).setText(perguntas.get(i).getTitulo());
+            if (!perguntas.get(i).getRespondida().equals("0")){
+                ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_answered);
+            }else{
+                ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);
+            }
 
-            scroll.addView(templateProg);
-            */
+            final String key = perguntas.get(i).getKey();
+            templatePerg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent it = new Intent(getContext(), Duvida.class);
+                    it.putExtra("key", key);
+                    startActivity(it);
+                }
+            });
+            Log.v("rgk", "alguem me ajuda" +i);
+            scroll.addView(templatePerg);
         }
     }
 

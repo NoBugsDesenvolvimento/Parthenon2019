@@ -46,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ConfiguracaoFirebase.updateValues("atividades", this);
+        ConfiguracaoFirebase.updateValues("evento", this);
+        ConfiguracaoFirebase.updateValues("perguntas", this);
+
         usuarioLogado();
         avisoEntrada();
         inicializarComponentes();
@@ -119,8 +124,6 @@ public class LoginActivity extends AppCompatActivity {
                 logarUsuarioButton.setVisibility(View.VISIBLE);
 
             }});
-
-
     }
 
 

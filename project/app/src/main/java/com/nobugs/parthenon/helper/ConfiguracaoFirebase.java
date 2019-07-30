@@ -62,6 +62,7 @@ public class ConfiguracaoFirebase {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 switch (dataSnapshot.getRef().getKey()){
                     case "atividades":
+                        Log.v("rgk", dataSnapshot.getChildrenCount() + " atv");
                         for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
                             try {
                                 RealmHelper.startTransaction();
@@ -75,6 +76,7 @@ public class ConfiguracaoFirebase {
                         }
                         break;
                     case "perguntas":
+                        Log.v("rgk", dataSnapshot.getChildrenCount() + " perg");
                         for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
                             try {
                                 RealmHelper.startTransaction();
@@ -88,6 +90,7 @@ public class ConfiguracaoFirebase {
                         }
                         break;
                     case "evento":
+                        Log.v("rgk", dataSnapshot.getChildrenCount() + " evt");
                         try {
                             RealmHelper.startTransaction();
                             EventoAux evtAux = dataSnapshot.getValue(EventoAux.class);

@@ -44,6 +44,7 @@
 
         <activity android:name=".activity.Loading" />
         <activity android:name=".activity.CadastroActivity" />
+        <activity android:name=".activity.Duvida"/>
         <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />
