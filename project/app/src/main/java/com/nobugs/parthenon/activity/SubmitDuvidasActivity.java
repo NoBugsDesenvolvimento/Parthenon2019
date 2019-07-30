@@ -68,10 +68,9 @@ public class SubmitDuvidasActivity extends AppCompatActivity {
         if(user != null){
         DatabaseReference database = ConfiguracaoFirebase.getFirebase();
         DatabaseReference mensagemRef = database.child("perguntas");
-        mensagemRef.push().setValue(perguntaAux);   }
-        else{
-            Toast.makeText(this, "Erro ao enviar pergunta. Tente novamente.", Toast.LENGTH_SHORT).show();
-        }
+        mensagemRef.setValue(perguntaAux);
+        finish();   }
+        else{ Toast.makeText(this, "Erro ao enviar pergunta. Tente novamente.", Toast.LENGTH_SHORT).show(); }
 
 
     }
