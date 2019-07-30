@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -55,7 +54,6 @@ public class Duvida extends FragmentActivity {
         atualizarPergunta.setTitulo(pergunta.get(0).getTitulo());
 
         tituloPergunta.setText(atualizarPergunta.getTitulo());
-        Toast.makeText(this, "a: " + atualizarPergunta.getPergunta(), Toast.LENGTH_SHORT).show();
         conteudoPergunta.setText(atualizarPergunta.getPergunta());
         if(atualizarPergunta.getResposta() != null){
         respostaPergunta.setText(atualizarPergunta.getResposta());

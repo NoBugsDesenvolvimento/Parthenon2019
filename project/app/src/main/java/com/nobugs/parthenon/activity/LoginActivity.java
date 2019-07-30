@@ -204,6 +204,7 @@ public class LoginActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Em Rede: Conheça a UFV.");
 
+
         builder.setMessage("Apenas aqueles que cadastraram podem acessar esse aplicativo. Caso seu cpf não tenha sido cadastrado, " +
                 "o aplicativo será fechado.");
         builder.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
