@@ -1,6 +1,7 @@
 package com.nobugs.parthenon.helper;
 
 import android.content.Context;
+import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -22,6 +23,7 @@ public class RealmHelper {
     }
 
     public static void dropDatabase(){
+        Log.v("rgk", "chamei pra deletar em algum lugar");
         if (realm != null) {
             startTransaction();
             realm.deleteAll();

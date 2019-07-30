@@ -77,20 +77,19 @@ public class Duvidas extends Fragment {
             ((TextView) templatePerg.findViewById(R.id.pergunta)).setText(perguntas.get(i).getTitulo());
             if (!perguntas.get(i).getRespondida().equals("0")){
                 ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_answered);
+                final String key = perguntas.get(i).getKey();
+                templatePerg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent it = new Intent(getContext(), Duvida.class);
+                        it.putExtra("key", key);
+                        startActivity(it);
+                    }
+                });
             }else{
                 ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);
             }
 
-            final String key = perguntas.get(i).getKey();
-            templatePerg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent it = new Intent(getContext(), Duvida.class);
-                    it.putExtra("key", key);
-                    startActivity(it);
-                }
-            });
-            Log.v("rgk", "alguem me ajuda" +i);
             scroll.addView(templatePerg);
         }
     }
