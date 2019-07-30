@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/search_bar"
+            android:id="@+id/search_insc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -25,9 +25,9 @@
             android:drawablePadding="5dp"
             android:ems="10"
 
+            android:hint="@string/search"
             android:inputType="textPersonName"
             android:padding="7dp"
-            android:text="@string/search"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/textColor"
             android:textSize="@dimen/normal_font_size"

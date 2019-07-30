@@ -10,11 +10,14 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,6 +34,7 @@ import com.nobugs.parthenon.model.Atividades.Atividade;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
@@ -49,6 +53,7 @@ public class Inscrever extends AppCompatActivity {
     private static RealmResults<Atividade> atividades;
     private static long inscCount = 0;
     private static String userKey = "fogogo";
+    private static EditText searchBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +99,8 @@ public class Inscrever extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.daysTabs);
         tabs.setupWithViewPager(viewPager);
 
+        searchBar = findViewById(R.id.search_insc);
+
     }
 
     private class DateSlidePagerAdapter extends FragmentStatePagerAdapter {
@@ -123,6 +130,8 @@ public class Inscrever extends AppCompatActivity {
     }
 
     public static class DayFragment extends Fragment {
+
+        final private ArrayList<View> insc = new ArrayList<>();
 
         @Override
         public void onResume() {
@@ -208,6 +217,32 @@ public class Inscrever extends AppCompatActivity {
 
                 scroll.addView(templateInsc);
             }
+
+            getView().findViewsWithText(insc,"Inscricoes",View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+            searchBar.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence newText, int i, int i1, int i2) {
+                    int total = insc.size();
+                    for (int j = 0; j < total; j++){
+                        String textString = ((TextView) insc.get(j).findViewById(R.id.name)).getText().toString().toLowerCase();
+                        if (!textString.contains(newText)){
+                            insc.get(j).setVisibility(View.GONE);
+                        }else{
+                            insc.get(j).setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
         }
 
         @Override

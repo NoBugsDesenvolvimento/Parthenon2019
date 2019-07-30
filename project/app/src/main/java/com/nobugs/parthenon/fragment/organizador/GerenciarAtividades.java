@@ -2,10 +2,13 @@ package com.nobugs.parthenon.fragment.organizador;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +27,7 @@ import com.nobugs.parthenon.model.Atividades.Atividade;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
@@ -39,6 +43,7 @@ public class GerenciarAtividades extends Fragment {
     private Set<Date> datesAux;
     private static Vector<String> dates;
     private static RealmResults<Atividade> atividades;
+    private static EditText searchBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,6 +76,8 @@ public class GerenciarAtividades extends Fragment {
                 createOrEdit("");
             }
         });
+
+        searchBar = rootView.findViewById(R.id.search_atv_adm);
 
         return rootView;
     }
@@ -112,6 +119,8 @@ public class GerenciarAtividades extends Fragment {
 
     public static class DayFragment extends Fragment {
 
+        final private ArrayList<View> atvs = new ArrayList<>();
+
         @Override
         public void onResume() {
             super.onResume();
@@ -146,6 +155,32 @@ public class GerenciarAtividades extends Fragment {
 
                 scroll.addView(templateProg);
             }
+
+            getView().findViewsWithText(atvs,"Atividades",View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+            searchBar.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence newText, int i, int i1, int i2) {
+                    int total = atvs.size();
+                    for (int j = 0; j < total; j++){
+                        String textString = ((TextView) atvs.get(j).findViewById(R.id.name)).getText().toString().toLowerCase();
+                        if (!textString.contains(newText)){
+                            atvs.get(j).setVisibility(View.GONE);
+                        }else{
+                            atvs.get(j).setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
         }
 
         @Override
