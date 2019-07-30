@@ -42,17 +42,18 @@ public class SubmitDuvidasActivity extends AppCompatActivity {
 
                 PerguntaAux pergunta = new PerguntaAux();
 
-                pergunta.setRespondida("0");
-                pergunta.setTitulo(tituloDuvida.getText().toString());
-                pergunta.setPergunta(conteudoDuvida.getText().toString());
-                //pergunta.setCPF();
+                if(tituloDuvida.getText() != null){
+                    if(conteudoDuvida.getText() != null){
 
-                savePergunta( pergunta);
+                        pergunta.setRespondida("0");
+                        pergunta.setTitulo(tituloDuvida.getText().toString());
+                        pergunta.setPergunta(conteudoDuvida.getText().toString());
+                        //pergunta.setCPF();
 
-
-
-            }
-        });
+                        savePergunta( pergunta); }
+                    else{ Toast.makeText(SubmitDuvidasActivity.this, "Preencha o conteúdo da sua dúvida.", Toast.LENGTH_SHORT).show(); } }
+                else{ Toast.makeText(SubmitDuvidasActivity.this, "Adicione um título a sua dúvida.", Toast.LENGTH_SHORT).show(); }
+            }});
 
 
     }
