@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        usuarioLogado();
+        //usuarioLogado();
         avisoEntrada();
         inicializarComponentes();
         autenticar = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -177,6 +177,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void usuarioLogado() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         if (user != null) {
             startActivity(new Intent(LoginActivity.this, NavigationScreen.class));

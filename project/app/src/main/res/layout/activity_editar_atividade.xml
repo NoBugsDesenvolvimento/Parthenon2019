@@ -185,6 +185,6 @@
         android:background="@drawable/background_button"
         android:onClick="confirmar"
         android:text="CONFIRMAR"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorAccent" />
 
 </LinearLayout>
