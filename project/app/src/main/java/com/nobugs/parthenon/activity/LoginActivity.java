@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         else if (retorno.equals("2")){
                             // código escolar. A diferença é que não carrega o cpf
-                                Intent permitirCadastro = new Intent(LoginActivity.this, CadastroActivity.class);
+                                Intent permitirCadastro = new Intent(LoginActivity.this, CadastroActivity.class).putExtra("cpf", "");
                                 startActivity(permitirCadastro);    }
                         else {
                             //Se não teve retorno, filho, fecha essa activity

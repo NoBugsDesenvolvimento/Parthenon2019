@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".fragment.organizador.EditarAtividade">
@@ -12,7 +13,9 @@
         android:id="@+id/tvTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lb_titulo" />
+        android:text="@string/lb_titulo"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etTitulo"
@@ -20,13 +23,16 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/empty" />
+        android:text="@string/empty"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/tvSumario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lb_sumario" />
+        android:text="@string/lb_sumario"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etSumario"
@@ -34,13 +40,16 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="start|top"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/tvPalestrante"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lb_palestrante" />
+        android:text="@string/lb_palestrante"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etPalestrante"
@@ -48,13 +57,17 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="start|top"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="normal" />
 
     <TextView
         android:id="@+id/tvLocal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lb_local" />
+        android:text="@string/lb_local"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etLocal"
@@ -62,7 +75,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/empty" />
+        android:text="@string/empty"
+        android:textColor="@color/colorPrimaryDark" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,14 +88,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lb_vagas" />
+            android:text="@string/lb_vagas"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lb_data" />
+            android:text="@string/lb_data"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -96,7 +114,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="numberSigned"
-            android:text="@string/empty" />
+            android:text="@string/empty"
+            android:textColor="@color/colorPrimaryDark" />
 
         <EditText
             android:id="@+id/etData"
@@ -105,7 +124,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="date"
-            android:text="@string/empty" />
+            android:text="@string/empty"
+            android:textColor="@color/colorPrimaryDark" />
     </LinearLayout>
 
     <LinearLayout
@@ -118,14 +138,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lb_hora_i" />
+            android:text="@string/lb_hora_i"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvHoraF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lb_hora_f" />
+            android:text="@string/lb_hora_f"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -140,7 +164,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="time"
-            android:text="@string/empty" />
+            android:text="@string/empty"
+            android:textColor="@color/colorPrimaryDark" />
 
         <EditText
             android:id="@+id/etHoraF"
@@ -149,14 +174,17 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="time"
-            android:text="@string/empty" />
+            android:text="@string/empty"
+            android:textColor="@color/colorPrimaryDark" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btCriar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        android:onClick="confirmar"/>
+        android:background="@drawable/background_button"
+        android:onClick="confirmar"
+        android:text="CONFIRMAR"
+        android:textColor="@color/colorPrimaryDark" />
 
 </LinearLayout>

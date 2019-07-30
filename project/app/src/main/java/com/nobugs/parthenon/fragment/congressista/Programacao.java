@@ -1,5 +1,6 @@
 package com.nobugs.parthenon.fragment.congressista;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -19,10 +20,13 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nobugs.parthenon.R;
+import com.nobugs.parthenon.activity.MapsActivity;
+import com.nobugs.parthenon.activity.SubmitDuvidasActivity;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.model.Atividades.Atividade;
@@ -45,14 +49,25 @@ public class Programacao extends Fragment {
     private DateSlidePagerAdapter dateCollection;
     private ViewPager viewPager;
     private Set<Date> datesAux;
+    private FloatingActionButton floatingActionButton;
     private static Vector<String> dates;
     private static RealmResults<Atividade> atividades;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         final ViewGroup rootView = (ViewGroup) getLayoutInflater().inflate(R.layout.fragment_programacao, container, false);
+
+        /*floatingActionButton = rootView.findViewById(R.id.floatingActionButtonProgramacao);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), MapsActivity.class);
+                startActivity(i);
+            }
+        }); */
 
         datesAux = new TreeSet<>();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.SubmitDuvidasActivity"></activity>
-        <activity android:name=".activity.Loading">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,7 +42,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.Loading" />
         <activity android:name=".activity.CadastroActivity" />
         <activity
             android:name=".activity.MapsActivity"

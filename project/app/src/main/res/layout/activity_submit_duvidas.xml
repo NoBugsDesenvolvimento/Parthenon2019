@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".activity.SubmitDuvidasActivity">
@@ -16,19 +17,26 @@
         android:layout_weight="0.01"
         android:ems="10"
         android:hint="Título"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:textColorHint="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/conteudoDuvida"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Insira sua pergunta." />
+            android:hint="Insira sua pergunta."
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimary"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -37,5 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="250dp"
         android:layout_weight="0.01"
-        android:text="ENVIAR" />
+        android:background="@drawable/background_button"
+        android:text="ENVIAR"
+        android:textColor="@color/colorPrimaryDark" />
 </LinearLayout>

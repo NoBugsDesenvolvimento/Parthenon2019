@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#004678</color>
-    <color name="colorPrimaryDark">#36486F</color>
-    <color name="colorAccent">#FDA24D</color>
+    <color name="colorPrimary">#F15A29</color>
+    <color name="colorPrimaryDark">#F1F2F2</color>
+    <color name="colorAccent">#383838</color>
+
+    <color name="colorPrimaryOriginal">#004678</color>
+    <color name="colorPrimaryDarkOriginal">#36486F</color>
+    <color name="colorAccentOriginal">#FDA24D</color>
 
     <color name="textColor">#FFFFFF</color>
     <color name="cinza">#454545</color>
