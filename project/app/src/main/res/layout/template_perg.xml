@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/question_border"
+    android:contentDescription="Perguntas"
     android:orientation="horizontal"
     android:padding="10dp">
 

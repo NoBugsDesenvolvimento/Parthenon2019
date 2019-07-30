@@ -3,10 +3,13 @@ package com.nobugs.parthenon.fragment.congressista;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +24,8 @@ import com.nobugs.parthenon.activity.SubmitDuvidasActivity;
 import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.model.Perguntas.Pergunta;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -29,6 +34,8 @@ public class Duvidas extends Fragment {
     private FloatingActionButton floatingActionButtonDuvidas;
     private FloatingActionButton floatingActionButtonMaps;
     private AlertDialog alerta;
+    final private ArrayList<View> pergs = new ArrayList<>();
+    private static EditText searchBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +60,8 @@ public class Duvidas extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), SubmitDuvidasActivity.class);
                 startActivity(i); }});
+
+        searchBar = rootView.findViewById(R.id.search_question);
 
         return rootView;
     }
@@ -92,6 +101,32 @@ public class Duvidas extends Fragment {
 
             scroll.addView(templatePerg);
         }
+
+        getView().findViewsWithText(pergs,"Perguntas",View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence newText, int i, int i1, int i2) {
+                int total = pergs.size();
+                for (int j = 0; j < total; j++){
+                    String textString = ((TextView) pergs.get(j).findViewById(R.id.pergunta)).getText().toString().toLowerCase();
+                    if (!textString.contains(newText)){
+                        pergs.get(j).setVisibility(View.GONE);
+                    }else{
+                        pergs.get(j).setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 
