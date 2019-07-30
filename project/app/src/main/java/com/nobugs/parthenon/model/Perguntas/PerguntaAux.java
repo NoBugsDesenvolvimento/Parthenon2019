@@ -7,7 +7,7 @@ public class PerguntaAux {
 
     private String pergunta;
     private String resposta;
-    private String CPF;
+    private String email;
     private String titulo;
     private String respondida;
 
@@ -29,12 +29,12 @@ public class PerguntaAux {
         this.titulo = titulo;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setEmail(String CPF) {
+        this.email = CPF;
     }
 
     private String hora_perg;

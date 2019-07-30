@@ -62,9 +62,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationChanged(Location location) {
                 mMap.clear();
+
+                //Marcadores
+                LatLng pvb = new LatLng(-20.763456, -42.866379);
+                LatLng pva = new LatLng(-20.760406, -42.867570);
+                LatLng cce = new LatLng(-20.764780, -42.868439);
+                LatLng bbt = new LatLng(-20.761319, -42.867808);
+                LatLng bernadao = new LatLng(-20.761820, -42.869289);
+                LatLng noBugs = new LatLng(-20.762974, -42.866979);
+                mMap.addMarker(new MarkerOptions().position(pvb).title("PVB - Pavilhão de Aulas B."));
+                mMap.addMarker(new MarkerOptions().position(pva).title("PVA - Pavilhão de Aulas A."));
+                mMap.addMarker(new MarkerOptions().position(cce).title("CCE - Centro de Ciências Exatas."));
+                mMap.addMarker(new MarkerOptions().position(bbt).title("BBT - Biblioteca Central"));
+                mMap.addMarker(new MarkerOptions().position(pvb).title("PVB - Pavilhão de Aulas B."));
+                mMap.addMarker(new MarkerOptions().position(bernadao).title("Edificio Arthur Bernades."));
+                mMap.addMarker(new MarkerOptions().position(noBugs).title("No Bugs - Empresa Júnior de Informática.").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                //fim dos marcadores
+
                 LatLng pessoa = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(pessoa).title("Você.").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pessoa, 18));     }
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pessoa, 18));
+
+            }
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {   }
             @Override
@@ -120,11 +139,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
         builder.setTitle("Em Rede: Conheça a UFV.");
 
-        builder.setMessage("É necessário saber algumas informações básicas sobre o Mapa. Primeiro: O marcador amarelo corresponde a posição do usuário." +
-                "Segundo, os marcadores vermelhos correspondem aos principais prédios da UFV cadastrados no evento." +
-                "Terceiro, o marcador azul corresponde a No Bugs." +
-                "Quarto, caso esteja perdido, basta clicar em um marcador e ele revelará seu nome." +
-                "Quinto, ao abrir o marcador é possível abrir o Google Maps usando um de seus ícones.");
+        builder.setMessage("É necessário saber algumas informações básicas sobre o Mapa. " +
+                " \n Primeiro: O marcador amarelo corresponde a posição do usuário." +
+                " \n Segundo, os marcadores vermelhos correspondem aos principais prédios da UFV cadastrados no evento." +
+                " \n Terceiro, o marcador azul corresponde a No Bugs." +
+                " \n Quarto, caso esteja perdido, basta clicar em um marcador e ele revelará seu nome." +
+                " \n Quinto, ao abrir o marcador é possível abrir o Google Maps usando um de seus ícones.");
         builder.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
             }

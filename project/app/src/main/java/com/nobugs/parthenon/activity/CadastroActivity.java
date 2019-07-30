@@ -82,11 +82,17 @@ public class CadastroActivity extends AppCompatActivity {
 
                         if (cpf != null) {
                             DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
-                            referencia.setValue("1");
-                        }
+                            referencia.setValue("1"); }
 
-                        startActivity(new Intent(getApplicationContext(), NavigationScreen.class));
-                        finish();
+                        if(usuario.getStatus().equals("Visitante")){
+                            startActivity( new Intent(CadastroActivity.this, NavigationScreen.class) );
+                            finish();   }
+                        if(usuario.getStatus().equals("Organizador")){
+                            startActivity( new Intent(CadastroActivity.this, NavigationScreenAdmin.class));
+                            finish();   }
+
+
+
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -210,11 +216,10 @@ public class CadastroActivity extends AppCompatActivity {
     private void avisoEntrada() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Atenção ao Cadastro");
-        builder.setMessage("Visitantes, não marquem nenhuma das opções do menu cinza. São apenas para a Equipe colaboradora do evento."
+        builder.setMessage("Visitantes, coloquem o CPF real de vocês, pois ele será a ferramenta utilizada para o Login."
         );
         builder.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(CadastroActivity.this, "Seja bem vindo!", Toast.LENGTH_SHORT).show();
 
             }
         });

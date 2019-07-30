@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".activity.SubmitDuvidasActivity">
@@ -47,5 +47,5 @@
         android:layout_weight="0.01"
         android:background="@drawable/background_button"
         android:text="ENVIAR"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorAccent" />
 </LinearLayout>

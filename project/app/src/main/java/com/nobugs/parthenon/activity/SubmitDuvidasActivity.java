@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -48,7 +49,10 @@ public class SubmitDuvidasActivity extends AppCompatActivity {
                         pergunta.setRespondida("0");
                         pergunta.setTitulo(tituloDuvida.getText().toString());
                         pergunta.setPergunta(conteudoDuvida.getText().toString());
-                        //pergunta.setCPF();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if(user != null){
+                            pergunta.setEmail(user.getEmail());
+                        }
 
                         savePergunta( pergunta); }
                     else{ Toast.makeText(SubmitDuvidasActivity.this, "Preencha o conteúdo da sua dúvida.", Toast.LENGTH_SHORT).show(); } }
@@ -60,10 +64,14 @@ public class SubmitDuvidasActivity extends AppCompatActivity {
 
 
     private void savePergunta( PerguntaAux perguntaAux){
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
         DatabaseReference database = ConfiguracaoFirebase.getFirebase();
         DatabaseReference mensagemRef = database.child("perguntas");
-        mensagemRef.push().setValue(perguntaAux);
+        mensagemRef.push().setValue(perguntaAux);   }
+        else{
+            Toast.makeText(this, "Erro ao enviar pergunta. Tente novamente.", Toast.LENGTH_SHORT).show();
+        }
 
 
     }

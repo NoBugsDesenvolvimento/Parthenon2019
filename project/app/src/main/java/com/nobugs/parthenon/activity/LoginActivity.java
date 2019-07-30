@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth autenticar;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private AlertDialog alerta;
+    private ProgressBar progressBar;
 
 
 
@@ -43,11 +46,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //usuarioLogado();
+        usuarioLogado();
         avisoEntrada();
         inicializarComponentes();
         autenticar = ConfiguracaoFirebase.getFirebaseAutenticacao();
-
+        progressBar = findViewById(R.id.progressBar);
 
 
 
@@ -55,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String cpfInserido = cpfUsuarioLogin.getText().toString();
+
 
                 DatabaseReference valorCPF = databaseReference.child("listaCPFs").child(cpfUsuarioLogin.getText().toString());
                 valorCPF.addValueEventListener(new ValueEventListener() {
@@ -108,7 +112,13 @@ public class LoginActivity extends AppCompatActivity {
         logarUsuarioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processoLogin(); }});
+                progressBar.setVisibility(View.VISIBLE);
+                logarUsuarioButton.setVisibility(View.INVISIBLE);
+                processoLogin();
+                progressBar.setVisibility(View.INVISIBLE);
+                logarUsuarioButton.setVisibility(View.VISIBLE);
+
+            }});
 
 
     }
@@ -126,13 +136,15 @@ public class LoginActivity extends AppCompatActivity {
                         String retorno = dataSnapshot.getValue().toString();
                         String[] atributos = retorno.split(",");
                         String email = atributos[5].substring(7);
-
+                        String status = atributos[6].substring(8, atributos[6].length()-1);
                         String senha = senhaUsuarioLogin.getText().toString();
 
                         Usuario usuario = new Usuario();
                         usuario.setEmail(email);
+                        usuario.setStatus(status);
                         usuario.setSenha(senha);
-                        validacaoUsuario(usuario);  }
+                        validacaoUsuario(usuario);
+                        }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) { }}); }
             else{ Toast.makeText(LoginActivity.this, "Preencha a senha para efetuar Login.", Toast.LENGTH_SHORT).show(); }
@@ -140,12 +152,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //Segunda fase do login, faz o login propriamente dito.
-    public void validacaoUsuario(Usuario usuario){
+    public void validacaoUsuario(final Usuario usuario){
         autenticar.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if( task.isSuccessful() ){
-                    startActivity( new Intent(LoginActivity.this, NavigationScreen.class) );    }
+                    if(usuario.getStatus().equals("Visitante")){
+                    startActivity( new Intent(LoginActivity.this, NavigationScreen.class) );
+                    finish();   }
+                    if(usuario.getStatus().equals("Organizador")){
+                        startActivity( new Intent(LoginActivity.this, NavigationScreenAdmin.class) );
+                    finish();   }
+
+                    }
                 else { String excecao = "";
                     try { throw task.getException(); }
                     catch ( FirebaseAuthInvalidUserException e ) { excecao = "Usuário não está cadastrado."; }
@@ -157,7 +176,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void usuarioLogado() {
-        if (autenticar.getCurrentUser() != null) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
             startActivity(new Intent(LoginActivity.this, NavigationScreen.class));
             finish();
         }

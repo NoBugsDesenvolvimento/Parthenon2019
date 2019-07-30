@@ -28,7 +28,7 @@
             android:inputType="textPersonName"
             android:padding="7dp"
             android:text="@string/search"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorPrimary"
             android:textColorHint="@color/textColor"
             android:textSize="@dimen/normal_font_size"
             tools:ignore="LabelFor"

@@ -1,5 +1,6 @@
 package com.nobugs.parthenon.fragment.congressista;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +23,9 @@ import io.realm.RealmResults;
 
 public class Duvidas extends Fragment {
     private static RealmResults<Pergunta> perguntas;
-    private FloatingActionButton floatingActionButton;
+    private FloatingActionButton floatingActionButtonDuvidas;
+    private FloatingActionButton floatingActionButtonMaps;
+    private AlertDialog alerta;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,16 +33,23 @@ public class Duvidas extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_duvidas, container, false);
 
-        floatingActionButton = rootView.findViewById(R.id.floatingActionButton);
+        floatingActionButtonDuvidas = rootView.findViewById(R.id.floatingActionButton);
+        floatingActionButtonMaps = rootView.findViewById(R.id.floatingActionButtonMaps);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+        floatingActionButtonMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), MapsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        floatingActionButtonDuvidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), SubmitDuvidasActivity.class);
-                startActivity(i);
-
-            }
-        });
+                startActivity(i); }});
 
         return rootView;
     }
@@ -70,5 +80,7 @@ public class Duvidas extends Fragment {
             */
         }
     }
+
+
 
 }
