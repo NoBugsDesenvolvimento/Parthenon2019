@@ -57,6 +57,7 @@ public class Programacao extends Fragment {
     private static Vector<String> dates;
     private static RealmResults<Atividade> atividades;
     private static EditText searchBar;
+    private static String searchText = "";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -91,7 +92,6 @@ public class Programacao extends Fragment {
         num_pages = dates.size();
 
         searchBar = rootView.findViewById(R.id.search_atv_user);
-
         return rootView;
     }
 
@@ -111,6 +111,7 @@ public class Programacao extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+            searchText = searchBar.getText().toString();
             Fragment fragment = new DayFragment();
             Bundle bd = new Bundle();
             bd.putInt("tab", position);
@@ -179,6 +180,8 @@ public class Programacao extends Fragment {
 
                 }
             });
+            searchBar.setText(searchText);
+            searchBar.setSelection(searchBar.getText().length());
         }
 
         @Override

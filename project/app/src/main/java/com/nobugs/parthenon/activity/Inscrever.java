@@ -54,6 +54,7 @@ public class Inscrever extends AppCompatActivity {
     private static long inscCount = 0;
     private static String userKey = "fogogo";
     private static EditText searchBar;
+    private static String searchText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,7 @@ public class Inscrever extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            searchText = searchBar.getText().toString();
             Fragment fragment = new DayFragment();
             Bundle bd = new Bundle();
             bd.putInt("tab", position);
@@ -243,6 +245,8 @@ public class Inscrever extends AppCompatActivity {
 
                 }
             });
+            searchBar.setText(searchText);
+            searchBar.setSelection(searchBar.getText().length());
         }
 
         @Override

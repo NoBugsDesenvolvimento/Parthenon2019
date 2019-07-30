@@ -44,6 +44,7 @@ public class GerenciarAtividades extends Fragment {
     private static Vector<String> dates;
     private static RealmResults<Atividade> atividades;
     private static EditText searchBar;
+    private static String searchText = "";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -98,6 +99,7 @@ public class GerenciarAtividades extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+            searchText = searchBar.getText().toString();
             Fragment fragment = new DayFragment();
             Bundle bd = new Bundle();
             bd.putInt("tab", position);
@@ -181,6 +183,8 @@ public class GerenciarAtividades extends Fragment {
 
                 }
             });
+            searchBar.setText(searchText);
+            searchBar.setSelection(searchBar.getText().length());
         }
 
         @Override
