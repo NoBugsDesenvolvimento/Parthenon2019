@@ -88,6 +88,8 @@ public class CadastroActivity extends AppCompatActivity {
                         if(usuario.getStatus().equals("Visitante")){
                             DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
                             referencia.setValue("1");
+                            Uri uri = Uri.parse("escolhaPalestras");
+                            UsuarioFirebase.atualizarFotoUsuario(uri);
                             startActivity( new Intent(CadastroActivity.this, NavigationScreen.class) );
                             finish();   }
                         if(usuario.getStatus().equals("Organizador")){
