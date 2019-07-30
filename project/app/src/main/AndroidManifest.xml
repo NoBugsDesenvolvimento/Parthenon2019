@@ -21,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.SubmitDuvidasActivity"></activity>
         <activity android:name=".activity.Loading">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,15 +42,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.CadastroActivity" />
         <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".activity.NavigationScreen">
-
-        </activity>
-        <activity android:name=".activity.NavigationScreenAdmin"></activity>
+        <activity android:name=".activity.NavigationScreen"></activity>
+        <activity android:name=".activity.NavigationScreenAdmin" />
         <activity android:name=".fragment.organizador.EditarAtividade" />
 
         <service

@@ -1,5 +1,6 @@
 package com.nobugs.parthenon.model.Usuários;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;

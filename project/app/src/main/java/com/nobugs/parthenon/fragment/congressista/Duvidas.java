@@ -1,5 +1,6 @@
 package com.nobugs.parthenon.fragment.congressista;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nobugs.parthenon.R;
+import com.nobugs.parthenon.activity.MapsActivity;
+import com.nobugs.parthenon.activity.SubmitDuvidasActivity;
 import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.model.Perguntas.Pergunta;
 
@@ -17,12 +22,24 @@ import io.realm.RealmResults;
 
 public class Duvidas extends Fragment {
     private static RealmResults<Pergunta> perguntas;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_duvidas, container, false);
+
+        floatingActionButton = rootView.findViewById(R.id.floatingActionButton);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), SubmitDuvidasActivity.class);
+                startActivity(i);
+
+            }
+        });
 
         return rootView;
     }

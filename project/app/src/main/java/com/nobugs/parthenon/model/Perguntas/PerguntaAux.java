@@ -1,9 +1,41 @@
 package com.nobugs.parthenon.model.Perguntas;
 
+import com.google.firebase.database.DatabaseReference;
+import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
+
 public class PerguntaAux {
 
     private String pergunta;
     private String resposta;
+    private String CPF;
+    private String titulo;
+    private String respondida;
+
+
+
+    public String getRespondida() {
+        return respondida;
+    }
+
+    public void setRespondida(String respondida) {
+        this.respondida = respondida;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
 
     private String hora_perg;
     private String hora_resp;

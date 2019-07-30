@@ -59,6 +59,7 @@ public class UsuarioFirebase {
         Usuario usuario = new Usuario();
         usuario.setEmail(firebaseUser.getEmail());
         usuario.setNome(firebaseUser.getDisplayName());
+
         usuario.setId(firebaseUser.getUid());
         usuario.setNomePesquisa(firebaseUser.getDisplayName().toUpperCase());
 
