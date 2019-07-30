@@ -160,12 +160,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if( task.isSuccessful() ){
-                    if(usuario.getStatus().equals("Visitante")){
-                    startActivity( new Intent(LoginActivity.this, NavigationScreen.class) );
-                    finish();   }
+
                     if(usuario.getStatus().equals("Organizador")){
                         startActivity( new Intent(LoginActivity.this, NavigationScreenAdmin.class) );
-                    finish();   }
+                        finish();   }
+                    else{
+                        startActivity( new Intent(LoginActivity.this, NavigationScreen.class) );
+                        finish();
+                    }
 
                     }
                 else { String excecao = "";
@@ -181,12 +183,10 @@ public class LoginActivity extends AppCompatActivity {
     public void usuarioLogado() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-
         if (user != null) {
             if(user.getPhotoUrl().toString().equals("admin")){
-                startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class));
-            }else{
-           startActivity(new Intent(LoginActivity.this, NavigationScreen.class));}
+                startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class)); }
+            else{ startActivity(new Intent(LoginActivity.this, NavigationScreen.class));}
             finish();
         }
     }

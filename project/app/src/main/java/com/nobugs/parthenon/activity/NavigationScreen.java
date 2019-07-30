@@ -15,6 +15,8 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.fragment.congressista.Duvidas;
 import com.nobugs.parthenon.fragment.congressista.InscricaoHolder;
@@ -120,7 +122,10 @@ public class NavigationScreen extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    if (true) {
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if (user.getPhotoUrl().equals("escolhaPalestras")) {
                         return new Programacao();
                     }else{
                         return new InscricaoHolder();
