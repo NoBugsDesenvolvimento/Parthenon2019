@@ -10,15 +10,6 @@ public class PerguntaAux {
     private String email;
     private String titulo;
     private String respondida;
-    private String nomeFirebase;
-
-    public String getNomeFirebase() {
-        return nomeFirebase;
-    }
-
-    public void setNomeFirebase(String nomeFirebase) {
-        this.nomeFirebase = nomeFirebase;
-    }
 
     public String getRespondida() {
         return respondida;

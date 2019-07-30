@@ -13,15 +13,6 @@ public class Pergunta extends RealmObject {
     private String email;
     private String titulo;
     private String respondida;
-    private String nomeFirebase;
-
-    public String getNomeFirebase() {
-        return nomeFirebase;
-    }
-
-    public void setNomeFirebase(String nomeFirebase) {
-        this.nomeFirebase = nomeFirebase;
-    }
 
     public String getKey() {
         return key;

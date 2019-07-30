@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 import com.nobugs.parthenon.helper.RealmHelper;
@@ -35,7 +36,7 @@ public class Duvida extends FragmentActivity {
 
         // Já ta pegando a key da pergunta pra povoar a tela
         Intent it = getIntent();
-        String key = it.getStringExtra("key");
+        final String key = it.getStringExtra("key");
         Log.v("rgk", key);
         tituloPergunta = findViewById(R.id.questionTitle);
         conteudoPergunta = findViewById(R.id.questionText);
@@ -46,7 +47,6 @@ public class Duvida extends FragmentActivity {
         Realm realm = RealmHelper.getRealm(this);
         RealmResults<Pergunta> pergunta = realm.where(Pergunta.class).equalTo("key", key).findAll();
         // pergunta.get(0) já é a pergunta
-        Toast.makeText(this, "a: " + pergunta.get(0).getNomeFirebase(), Toast.LENGTH_SHORT).show();
 
         final PerguntaAux atualizarPergunta = new PerguntaAux();
         atualizarPergunta.setPergunta(pergunta.get(0).getPergunta());
@@ -54,7 +54,6 @@ public class Duvida extends FragmentActivity {
         atualizarPergunta.setEmail(pergunta.get(0).getEmail());
         atualizarPergunta.setRespondida(pergunta.get(0).getRespondida());
         atualizarPergunta.setTitulo(pergunta.get(0).getTitulo());
-        atualizarPergunta.setNomeFirebase(pergunta.get(0).getNomeFirebase());
 
         tituloPergunta.setText(atualizarPergunta.getTitulo());
         conteudoPergunta.setText(atualizarPergunta.getPergunta());
@@ -78,16 +77,11 @@ public class Duvida extends FragmentActivity {
             public void onClick(View view) {
                 atualizarPergunta.setResposta(editEscreverResposta.getText().toString());
                 atualizarPergunta.setRespondida("1");
-                DatabaseReference database = ConfiguracaoFirebase.getFirebase();
-                DatabaseReference mensagemRef = database.child("perguntas");
-
-                //mensagemRef.child(atualizarPergunta.getNomeFirebase()).removeValue();
-                mensagemRef.push().setValue(atualizarPergunta);
-
+                FirebaseDatabase db = ConfiguracaoFirebase.getDatabase();
+                DatabaseReference myRef = db.getReference("perguntas/" + key);
+                myRef.setValue(atualizarPergunta);
             }
         });
-
-
 
     }
 }

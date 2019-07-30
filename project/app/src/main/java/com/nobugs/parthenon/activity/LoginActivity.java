@@ -27,8 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
+import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.helper.UsuarioFirebase;
 import com.nobugs.parthenon.model.Usuários.Usuario;
+
+import io.realm.Realm;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -46,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        RealmHelper.getRealm(this);
 
         ConfiguracaoFirebase.updateValues("atividades", this);
         ConfiguracaoFirebase.updateValues("evento", this);

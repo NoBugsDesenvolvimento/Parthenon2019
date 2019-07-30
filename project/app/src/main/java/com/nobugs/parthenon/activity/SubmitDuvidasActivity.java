@@ -12,10 +12,15 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
+import com.nobugs.parthenon.helper.RealmHelper;
+import com.nobugs.parthenon.model.Perguntas.Pergunta;
 import com.nobugs.parthenon.model.Perguntas.PerguntaAux;
 import java.util.UUID;
+
+import io.realm.Realm;
 
 public class SubmitDuvidasActivity extends AppCompatActivity {
     private EditText tituloDuvida;
@@ -42,7 +47,6 @@ public class SubmitDuvidasActivity extends AppCompatActivity {
                         pergunta.setRespondida("0");
                         pergunta.setTitulo(tituloDuvida.getText().toString());
                         pergunta.setPergunta(conteudoDuvida.getText().toString());
-                        pergunta.setNomeFirebase(UUID.randomUUID().toString());
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if(user != null){
                             pergunta.setEmail(user.getEmail());
@@ -61,10 +65,17 @@ public class SubmitDuvidasActivity extends AppCompatActivity {
     private void savePergunta( PerguntaAux perguntaAux){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
-        DatabaseReference database = ConfiguracaoFirebase.getFirebase();
-        DatabaseReference mensagemRef = database.child("perguntas").child(perguntaAux.getNomeFirebase());
-        mensagemRef.setValue(perguntaAux);
-        finish();   }
+            FirebaseDatabase db = ConfiguracaoFirebase.getDatabase();
+            DatabaseReference myRef = db.getReference("perguntas").push();
+            myRef.setValue(perguntaAux);
+
+            Realm realm = RealmHelper.getRealm(this);
+            Pergunta perg = new Pergunta(perguntaAux, myRef.getKey());
+            RealmHelper.startTransaction();
+            realm.insertOrUpdate(perg);
+            RealmHelper.endTransaction();
+            finish();
+        }
         else{ Toast.makeText(this, "Erro ao enviar pergunta. Tente novamente.", Toast.LENGTH_SHORT).show(); }
 
 
