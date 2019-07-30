@@ -53,7 +53,6 @@ public class ConfiguracaoFirebase {
 
     public static void updateValues(String reference, Context ctx){
         final Realm realm = RealmHelper.getRealm(ctx);
-        RealmHelper.dropDatabase();
         FirebaseDatabase db = getDatabase();
         DatabaseReference myRef = db.getReference(reference);
 
