@@ -15,6 +15,7 @@ public class RealmHelper {
             //Iniciar Realm
             Realm.init(ctx);
             RealmConfiguration config = new RealmConfiguration.Builder()
+                    .deleteRealmIfMigrationNeeded()
                     .build();
             realm = Realm.getInstance(config);
         }
