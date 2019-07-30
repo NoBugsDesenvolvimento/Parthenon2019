@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -45,6 +46,7 @@ public class Duvida extends FragmentActivity {
         Realm realm = RealmHelper.getRealm(this);
         RealmResults<Pergunta> pergunta = realm.where(Pergunta.class).equalTo("key", key).findAll();
         // pergunta.get(0) já é a pergunta
+        Toast.makeText(this, "a: " + pergunta.get(0).getNomeFirebase(), Toast.LENGTH_SHORT).show();
 
         final PerguntaAux atualizarPergunta = new PerguntaAux();
         atualizarPergunta.setPergunta(pergunta.get(0).getPergunta());
@@ -52,6 +54,7 @@ public class Duvida extends FragmentActivity {
         atualizarPergunta.setEmail(pergunta.get(0).getEmail());
         atualizarPergunta.setRespondida(pergunta.get(0).getRespondida());
         atualizarPergunta.setTitulo(pergunta.get(0).getTitulo());
+        atualizarPergunta.setNomeFirebase(pergunta.get(0).getNomeFirebase());
 
         tituloPergunta.setText(atualizarPergunta.getTitulo());
         conteudoPergunta.setText(atualizarPergunta.getPergunta());
@@ -77,7 +80,10 @@ public class Duvida extends FragmentActivity {
                 atualizarPergunta.setRespondida("1");
                 DatabaseReference database = ConfiguracaoFirebase.getFirebase();
                 DatabaseReference mensagemRef = database.child("perguntas");
+
+                //mensagemRef.child(atualizarPergunta.getNomeFirebase()).removeValue();
                 mensagemRef.push().setValue(atualizarPergunta);
+
             }
         });
 
