@@ -32,6 +32,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Manifest.permission.ACCESS_FINE_LOCATION    };
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private androidx.appcompat.app.AlertDialog alerta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,26 +41,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         Permissoes.checarPermissao(permissoes, this, 0);
+        avisoEntrada();
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-
     }
 
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -122,5 +114,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }); //fim dos métodos do builder
         AlertDialog mensagem = builder.create();
         mensagem.show();    } // fim do alerta de permissão
+
+    private void avisoEntrada() {
+        //Cria o gerador do AlertDialog
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        builder.setTitle("Em Rede: Conheça a UFV.");
+
+        builder.setMessage("É necessário saber algumas informações básicas sobre o Mapa. Primeiro: O marcador amarelo corresponde a posição do usuário." +
+                "Segundo, os marcadores vermelhos correspondem aos principais prédios da UFV cadastrados no evento." +
+                "Terceiro, o marcador azul corresponde a No Bugs." +
+                "Quarto, caso esteja perdido, basta clicar em um marcador e ele revelará seu nome." +
+                "Quinto, ao abrir o marcador é possível abrir o Google Maps usando um de seus ícones.");
+        builder.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+            }
+        });
+
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
+
+
 
 }
