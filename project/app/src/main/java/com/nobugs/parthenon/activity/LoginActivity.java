@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //usuarioLogado();
+        usuarioLogado();
         avisoEntrada();
         inicializarComponentes();
         autenticar = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -180,7 +180,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (user != null) {
-            startActivity(new Intent(LoginActivity.this, NavigationScreen.class));
+            if(user.getPhotoUrl().toString().equals("admin")){
+                startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class));
+            }else{
+           startActivity(new Intent(LoginActivity.this, NavigationScreen.class));}
             finish();
         }
     }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -85,11 +86,18 @@ public class CadastroActivity extends AppCompatActivity {
                             referencia.setValue("1"); }
 
                         if(usuario.getStatus().equals("Visitante")){
+                            DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
+                            referencia.setValue("1");
                             startActivity( new Intent(CadastroActivity.this, NavigationScreen.class) );
                             finish();   }
                         if(usuario.getStatus().equals("Organizador")){
+                            DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
+                            referencia.setValue("1");
+                            Uri uri = Uri.parse("admin");
+                            UsuarioFirebase.atualizarFotoUsuario(uri);
                             startActivity( new Intent(CadastroActivity.this, NavigationScreenAdmin.class));
-                            finish();   }
+                            finish();
+                        }
 
 
 

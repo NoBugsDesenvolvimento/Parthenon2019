@@ -32,7 +32,6 @@ public class NavigationScreenAdmin extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Toast.makeText(this, "Admin", Toast.LENGTH_SHORT).show();
 
         setContentView(R.layout.activity_navigation_screen_adm);
 
