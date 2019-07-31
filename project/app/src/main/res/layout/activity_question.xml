@@ -40,7 +40,8 @@
         android:hint="Escreva uma resposta"
         android:inputType="textPersonName"
         android:textAlignment="textEnd"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent" />
 
     <Button
         android:id="@+id/buttonAtualizarResposta"
