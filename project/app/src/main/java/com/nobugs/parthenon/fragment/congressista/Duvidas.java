@@ -83,8 +83,10 @@ public class Duvidas extends Fragment {
         for (int i = count-1; i >= 0; i--) {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
             if (user != null) {
-                if(user.getPhotoUrl()!= null){if (!user.getPhotoUrl().toString().equals("admin")) {
+                if(user.getPhotoUrl()!= null){
+                    if (!user.getPhotoUrl().toString().equals("admin")) {
 
                     if (perguntas.get(i).getRespondida().equals("1")) {
                         LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
@@ -92,6 +94,7 @@ public class Duvidas extends Fragment {
                         Log.v("rgk", perguntas.get(i).getTitulo());
 
                         ((TextView) templatePerg.findViewById(R.id.pergunta)).setText(perguntas.get(i).getTitulo());
+
                         if (!perguntas.get(i).getRespondida().equals("0")) {
                             ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_answered);
                             final String key = perguntas.get(i).getKey();
@@ -100,20 +103,20 @@ public class Duvidas extends Fragment {
                                 public void onClick(View view) {
                                     Intent it = new Intent(getContext(), Duvida.class);
                                     it.putExtra("key", key);
-                                    startActivity(it);
-                                }
-                            });
-                        } else {
-                            ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);
-                        }
+                                    startActivity(it); }    }); }
+                        else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);    }
 
-                        scroll.addView(templatePerg); } }}
+                        scroll.addView(templatePerg); }
+                    }}
+
                 else {
+
                     LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
 
                     Log.v("rgk", perguntas.get(i).getTitulo());
 
                     ((TextView) templatePerg.findViewById(R.id.pergunta)).setText(perguntas.get(i).getTitulo());
+
                     if (!perguntas.get(i).getRespondida().equals("0")) {
                         ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_answered);
                         final String key = perguntas.get(i).getKey();
@@ -122,11 +125,13 @@ public class Duvidas extends Fragment {
                             public void onClick(View view) {
                                 Intent it = new Intent(getContext(), Duvida.class);
                                 it.putExtra("key", key);
-                                startActivity(it); }});
-                    }
+                                startActivity(it); }}); }
                     else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time); }
-                    scroll.addView(templatePerg); } }
+                    scroll.addView(templatePerg);
+                }
             }
+
+        }
 
         getView().findViewsWithText(pergs,"Perguntas",View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
         searchBar.addTextChangedListener(new TextWatcher() {

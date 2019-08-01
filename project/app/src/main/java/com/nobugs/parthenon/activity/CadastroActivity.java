@@ -102,9 +102,9 @@ public class CadastroActivity extends AppCompatActivity {
                             DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
                             referencia.setValue("1");
                             Uri uri = Uri.parse("admin");
-                            UsuarioFirebase.atualizarFotoUsuario(uri);
+                           if( UsuarioFirebase.atualizarFotoUsuario(uri)){
                             startActivity( new Intent(CadastroActivity.this, NavigationScreenAdmin.class));
-                            finish();
+                            finish();}
                         }
 
 
