@@ -14,7 +14,8 @@
     <item
         android:id="@+id/nav_noticias"
         android:icon="@drawable/ic_news_24dp"
-        android:title="@string/title_noticias" />
+        android:title="@string/title_noticias"
+        android:visible="false"/>
 
     <item
         android:id="@+id/nav_evento"

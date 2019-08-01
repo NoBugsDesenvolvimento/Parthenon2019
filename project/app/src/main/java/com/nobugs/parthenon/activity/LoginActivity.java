@@ -192,8 +192,9 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            if(user.getPhotoUrl().toString().equals("admin")){
-                startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class)); }
+          if(user.getPhotoUrl() != null)  {
+              if(user.getPhotoUrl().toString().equals("admin")){
+                startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class)); }}
             else{ startActivity(new Intent(LoginActivity.this, NavigationScreen.class));}
             finish();
         }

@@ -198,7 +198,7 @@ public class GerenciarAtividades extends Fragment {
     }
 
     public void createOrEdit(String key){
-        Intent it = new Intent(getContext(), EditarAtividade.class);
+        Intent it = new Intent(getContext(), EditarAtividade.class).putExtra("key", key);
         startActivity(it);
     }
 }

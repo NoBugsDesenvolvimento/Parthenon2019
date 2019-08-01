@@ -84,7 +84,7 @@ public class Duvidas extends Fragment {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
-                if (!user.getPhotoUrl().toString().equals("admin")) {
+                if(user.getPhotoUrl()!= null){if (!user.getPhotoUrl().toString().equals("admin")) {
 
                     if (perguntas.get(i).getRespondida().equals("1")) {
                         LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
@@ -107,7 +107,7 @@ public class Duvidas extends Fragment {
                             ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);
                         }
 
-                        scroll.addView(templatePerg); } }
+                        scroll.addView(templatePerg); } }}
                 else {
                     LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
 
