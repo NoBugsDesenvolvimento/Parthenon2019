@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:contentDescription="Atividades"
-    app:cardBackgroundColor="@color/colorPrimaryDark"
+    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="5dp"
     app:contentPadding="5dp"
     tools:context=".fragment.Templates.ProgramacaoTemplate">

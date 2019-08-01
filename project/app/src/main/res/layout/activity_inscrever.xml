@@ -28,8 +28,9 @@
             android:hint="@string/search"
             android:inputType="textPersonName"
             android:padding="7dp"
-            android:textColor="@color/colorAccent"
-            android:textColorHint="@color/textColor"
+            android:textColor="@color/colorPrimaryDarkParthenon"
+            android:textColorHint="@color/colorPrimaryDarkParthenon"
+            android:textStyle="bold"
             android:textSize="@dimen/normal_font_size"
             tools:ignore="LabelFor"
             tools:targetApi="o" />

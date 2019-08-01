@@ -10,6 +10,7 @@
         android:id="@+id/screenPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".activity.NavigationScreen"

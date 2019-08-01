@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         avisoEntrada();
         inicializarComponentes();
         autenticar = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar2);
 
 
 
@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "O CPF já foi cadastrado.", Toast.LENGTH_SHORT).show();
                             logarUsuarioButton.setVisibility(View.VISIBLE);
                             senhaUsuarioLogin.setVisibility(View.VISIBLE);
+                            senhaUsuarioLogin.requestFocus();
                             logarUsuarioButton.setVisibility(View.VISIBLE);
                             verificarCPFbutton.setVisibility(View.GONE);    }
 
@@ -125,8 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 logarUsuarioButton.setVisibility(View.INVISIBLE);
                 processoLogin();
-                progressBar.setVisibility(View.INVISIBLE);
-                logarUsuarioButton.setVisibility(View.VISIBLE);
+
 
             }});
     }
@@ -181,7 +181,10 @@ public class LoginActivity extends AppCompatActivity {
                     catch ( FirebaseAuthInvalidCredentialsException e ){ excecao = "E-mail e senha não correspondem a um usuário cadastrado"; }
                     catch (Exception e){ excecao = "Erro ao cadastrar usuário: "  + e.getMessage();
                         e.printStackTrace(); }
-                    Toast.makeText(LoginActivity.this, excecao, Toast.LENGTH_SHORT).show(); } }}); }//fecha o método e o else
+                    Toast.makeText(LoginActivity.this, excecao, Toast.LENGTH_SHORT).show(); }
+                progressBar.setVisibility(View.INVISIBLE);
+                logarUsuarioButton.setVisibility(View.VISIBLE);
+            }}); }//fecha o método e o else
 
 
 
