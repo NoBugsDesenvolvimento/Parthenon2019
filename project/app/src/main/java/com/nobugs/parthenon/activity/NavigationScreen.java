@@ -125,11 +125,14 @@ public class NavigationScreen extends FragmentActivity {
 
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    if (user.getPhotoUrl().equals("escolhaPalestras")) {
-                        return new Programacao();
-                    }else{
-                        return new InscricaoHolder();
-                    }
+                        if(user.getPhotoUrl() != null){
+                            if (user.getPhotoUrl().toString().equals("https://escolhaPalestras.com")){
+                                return new InscricaoHolder(); }
+                            else{return new Programacao();  }
+                        }else{return new Programacao(); }
+
+
+
                 case 1:
                     return new Duvidas();
                 case 2:

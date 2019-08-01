@@ -115,7 +115,6 @@
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary" />
 
-
         <Button
             android:id="@+id/buttonCadastrar"
             android:layout_width="match_parent"
@@ -126,7 +125,50 @@
             android:background="@drawable/background_button"
             android:fontFamily="@font/poppins_black"
             android:text="Cadastrar"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="gone" />
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_black"
+            android:onClick="termosUso"
+            android:text="Para utilizar o aplicativo é necessário que o usuário concorde com os termos de uso. Estes podem ser encontrados clicando aqui." />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/poppins_black"
+            android:onClick="politicaPrivacidade"
+            android:text="É necessário também concordar com a política de privacidade que pode ser encontrada clicando aqui." />
+
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/poppins_black"
+            android:onClick="permitirCadastro"
+            android:text="Declaro que li e aceito os termos de uso e política de privacidade"
+            android:textColor="#707070" />
+
+    </LinearLayout>
+
 
     </LinearLayout>
 </ScrollView>

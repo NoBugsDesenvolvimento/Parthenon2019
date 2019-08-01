@@ -35,8 +35,8 @@ public class CadastroActivity extends AppCompatActivity {
     private Usuario usuario;
     private FirebaseAuth autenticar;
     private Button btnCadastro;
-    private TextInputLayout layoutValidar;
-    private RadioButton radioStaff, radioPalestrante, radioOrganizador;
+
+
     private AlertDialog alerta;
 
 
@@ -88,10 +88,13 @@ public class CadastroActivity extends AppCompatActivity {
                         if(usuario.getStatus().equals("Visitante")){
                             DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
                             referencia.setValue("1");
-                            Uri uri = Uri.parse("escolhaPalestras");
+                            Uri uri = Uri.parse("https://escolhaPalestras.com");
                             UsuarioFirebase.atualizarFotoUsuario(uri);
-                            startActivity( new Intent(CadastroActivity.this, NavigationScreen.class) );
+                            Intent intentNavigation = new Intent(CadastroActivity.this, NavigationScreen.class);
+                            startActivity( intentNavigation );
+                            Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso. ", Toast.LENGTH_LONG).show();
                             finish();   }
+
                         if(usuario.getStatus().equals("Organizador")){
                             DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
                             referencia.setValue("1");
@@ -193,24 +196,7 @@ public class CadastroActivity extends AppCompatActivity {
     }//Fecha o método de cadastro
 
 
-    public boolean verificarKey(String codigoValidar) {
-        boolean resultado = false;
-        if (radioOrganizador.isChecked() && codigoValidar.equals(getString(R.string.key_organizador))) {
-            resultado = true;
-        }
-        if (radioStaff.isChecked() && codigoValidar.equals(getString(R.string.key_staff))) {
-            resultado = true;
-        }
-        if (radioPalestrante.isChecked() && codigoValidar.equals(getString(R.string.key_palestrante))) {
-            resultado = true;
-        }
-        return resultado;
-    }
 
-
-    public void revelarCodigo(View view) {
-        layoutValidar.setVisibility(View.VISIBLE);
-    }
 
     public void inicializarComponentes() {
         editCPF = findViewById(R.id.editCpfCadastro);
@@ -238,6 +224,24 @@ public class CadastroActivity extends AppCompatActivity {
         //Exibe
         alerta.show();
     }
+
+    public void permitirCadastro(View view){
+        btnCadastro.setVisibility(View.VISIBLE);
+    }
+
+    public void termosUso(View view){
+        Uri uri = Uri.parse("https://drive.google.com/open?id=1u3_Ix_jP6l-rSqgT2O_bEVEh8KqTgcCF");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
+    public void politicaPrivacidade(View view){
+        Uri uri = Uri.parse("https://drive.google.com/open?id=1gbVpd1-GboNbPZJdselHPQ9RMLdDZy24");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
+
 }
 
 

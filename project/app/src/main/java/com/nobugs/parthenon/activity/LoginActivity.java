@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         ConfiguracaoFirebase.updateValues("evento", this);
         ConfiguracaoFirebase.updateValues("perguntas", this);
 
-        usuarioLogado();
+        //usuarioLogado();
         avisoEntrada();
         inicializarComponentes();
         autenticar = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -210,14 +210,14 @@ public class LoginActivity extends AppCompatActivity {
     private void avisoEntrada() {
         //Cria o gerador do AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Em Rede: Conheça a UFV.");
+        builder.setTitle("Mostra Universitária:");
 
 
         builder.setMessage("Apenas aqueles que cadastraram podem acessar esse aplicativo. Caso seu cpf não tenha sido cadastrado, " +
                 "o aplicativo será fechado.");
         builder.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(LoginActivity.this, "Seja bem vindo!", Toast.LENGTH_SHORT).show();
+
 
             }
         });
