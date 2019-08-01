@@ -37,8 +37,8 @@ public class UsuarioFirebase {
             e.printStackTrace(); }
     }
 
-    public static void atualizarFotoUsuario(Uri uri) {
-
+    public static boolean atualizarFotoUsuario(Uri uri) {
+            boolean retorno;
         try{
             FirebaseUser user = getUsuarioAtual();
 
@@ -48,9 +48,14 @@ public class UsuarioFirebase {
                 public void onComplete(@NonNull Task<Void> task) {
                     if(!task.isSuccessful()){
                         Log.d("Perfil", "Erro ao atualizar foto. Tente novamente.");
-                    } }}); }
+
+                    }
+
+                }});
+        return true;    }
         catch (Exception e){
             e.printStackTrace(); }
+        return false;
     }
 
     public static Usuario getDadosUsuarioLogado() {

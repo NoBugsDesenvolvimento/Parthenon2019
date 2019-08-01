@@ -89,11 +89,14 @@ public class CadastroActivity extends AppCompatActivity {
                             DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
                             referencia.setValue("1");
                             Uri uri = Uri.parse("https://escolhaPalestras.com");
-                            UsuarioFirebase.atualizarFotoUsuario(uri);
+
+                            if(UsuarioFirebase.atualizarFotoUsuario(uri)){
                             Intent intentNavigation = new Intent(CadastroActivity.this, NavigationScreen.class);
                             startActivity( intentNavigation );
-                            Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso. ", Toast.LENGTH_LONG).show();
-                            finish();   }
+                                Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso. ", Toast.LENGTH_LONG).show();
+                                finish();   }
+
+                               }
 
                         if(usuario.getStatus().equals("Organizador")){
                             DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
