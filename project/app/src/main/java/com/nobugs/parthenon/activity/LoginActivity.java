@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         ConfiguracaoFirebase.updateValues("evento", this);
         ConfiguracaoFirebase.updateValues("perguntas", this);
 
-        //usuarioLogado();
+        usuarioLogado();
         avisoEntrada();
         inicializarComponentes();
         autenticar = ConfiguracaoFirebase.getFirebaseAutenticacao();
