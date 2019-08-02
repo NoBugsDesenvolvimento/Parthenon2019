@@ -44,7 +44,8 @@
             android:layout_height="wrap_content"
             android:hint="Responda a dúvida clicando aqui."
             android:textAlignment="textEnd"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

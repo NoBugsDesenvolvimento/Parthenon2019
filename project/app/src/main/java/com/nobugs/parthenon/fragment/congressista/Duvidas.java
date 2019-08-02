@@ -61,7 +61,9 @@ public class Duvidas extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), SubmitDuvidasActivity.class);
-                startActivity(i); }});
+                startActivity(i);
+            }
+        });
 
         searchBar = rootView.findViewById(R.id.search_question);
 
@@ -79,16 +81,35 @@ public class Duvidas extends Fragment {
         scroll.removeAllViews();
 
         int count = perguntas.size();
-        Log.v("rgk", count+"");
-        for (int i = count-1; i >= 0; i--) {
+        Log.v("rgk", count + "");
+        for (int i = count - 1; i >= 0; i--) {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            if (user != null) {
-                if(user.getPhotoUrl()!= null){
+
                     if (!user.getPhotoUrl().toString().equals("admin")) {
 
-                    if (perguntas.get(i).getRespondida().equals("1")) {
+                        if (perguntas.get(i).getRespondida().equals("1")) {
+                            LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
+
+                            Log.v("rgk", perguntas.get(i).getTitulo());
+
+                            ((TextView) templatePerg.findViewById(R.id.pergunta)).setText(perguntas.get(i).getTitulo());
+
+                            if (!perguntas.get(i).getRespondida().equals("0")) {
+                                ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_answered);
+                                final String key = perguntas.get(i).getKey();
+                                templatePerg.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent it = new Intent(getContext(), Duvida.class);
+                                        it.putExtra("key", key);
+                                        startActivity(it);  }}); }
+                            else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time); }
+                            scroll.addView(templatePerg);
+                        }
+                    }
+                 else {
                         LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
 
                         Log.v("rgk", perguntas.get(i).getTitulo());
@@ -103,74 +124,52 @@ public class Duvidas extends Fragment {
                                 public void onClick(View view) {
                                     Intent it = new Intent(getContext(), Duvida.class);
                                     it.putExtra("key", key);
-                                    startActivity(it); }    }); }
-                        else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);    }
+                                    startActivity(it);  }}); }
+                        else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);
+                            final String key = perguntas.get(i).getKey();
+                            templatePerg.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent it = new Intent(getContext(), Duvida.class);
+                                    it.putExtra("key", key);
+                                    startActivity(it);
+                                }
+                            });
 
-                        scroll.addView(templatePerg); }
-                    }}
-
-                else {
-
-                    LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
-
-                    Log.v("rgk", perguntas.get(i).getTitulo());
-
-                    ((TextView) templatePerg.findViewById(R.id.pergunta)).setText(perguntas.get(i).getTitulo());
-
-                    if (!perguntas.get(i).getRespondida().equals("0")) {
-                        ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_answered);
-                        final String key = perguntas.get(i).getKey();
-                        templatePerg.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent it = new Intent(getContext(), Duvida.class);
-                                it.putExtra("key", key);
-                                startActivity(it);
-                            }}); }
-                    else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);
-                    final String key = perguntas.get(i).getKey();
-                    templatePerg.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent it = new Intent(getContext(), Duvida.class);
-                            it.putExtra("key", key);
-                            startActivity(it);
                         }
-                    });
-                    }
-                    scroll.addView(templatePerg);
-                }
-            }
+                        scroll.addView(templatePerg);
 
+                }
+
+
+
+            getView().findViewsWithText(pergs, "Perguntas", View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+            searchBar.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence newText, int i, int i1, int i2) {
+                    int total = pergs.size();
+                    for (int j = 0; j < total; j++) {
+                        String textString = ((TextView) pergs.get(j).findViewById(R.id.pergunta)).getText().toString().toLowerCase();
+                        if (!textString.contains(newText)) {
+                            pergs.get(j).setVisibility(View.GONE);
+                        } else {
+                            pergs.get(j).setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
         }
 
-        getView().findViewsWithText(pergs,"Perguntas",View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
-        searchBar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence newText, int i, int i1, int i2) {
-                int total = pergs.size();
-                for (int j = 0; j < total; j++){
-                    String textString = ((TextView) pergs.get(j).findViewById(R.id.pergunta)).getText().toString().toLowerCase();
-                    if (!textString.contains(newText)){
-                        pergs.get(j).setVisibility(View.GONE);
-                    }else{
-                        pergs.get(j).setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
     }
-
-
-
 }

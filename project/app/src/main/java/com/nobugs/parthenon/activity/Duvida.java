@@ -68,7 +68,7 @@ public class Duvida extends FragmentActivity {
                 editEscreverResposta.setVisibility(View.VISIBLE);
                 atualizarResposta.setVisibility(View.VISIBLE);
                 respostaPergunta.setVisibility(View.INVISIBLE); }
-            else{ editEscreverResposta.setVisibility(View.INVISIBLE);
+            else{ editEscreverResposta.setVisibility(View.GONE);
                 atualizarResposta.setVisibility(View.INVISIBLE);
                 respostaPergunta.setVisibility(View.VISIBLE);   }   }
 

@@ -81,7 +81,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                         Toast.makeText(CadastroActivity.this, "Cadastro com sucesso", Toast.LENGTH_SHORT).show();
 
-                        if (cpf != null) {
+                        if (cpf != null && !cpf.equals("")) {
                             DatabaseReference referencia = FirebaseDatabase.getInstance().getReference().child("listaCPFs").child(cpf).child("estado");
                             referencia.setValue("1"); }
 
