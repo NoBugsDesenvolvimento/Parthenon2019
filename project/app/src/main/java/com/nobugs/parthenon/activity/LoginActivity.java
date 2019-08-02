@@ -194,9 +194,13 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
           if(user.getPhotoUrl() != null)  {
               if(user.getPhotoUrl().toString().equals("admin")){
-                startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class)); }}
-            else{ startActivity(new Intent(LoginActivity.this, NavigationScreen.class));}
-            finish();
+                startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class));
+                  finish();
+              }}
+            else{ startActivity(new Intent(LoginActivity.this, NavigationScreen.class));
+              finish();
+            }
+
         }
     }
 

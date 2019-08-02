@@ -125,8 +125,19 @@ public class Duvidas extends Fragment {
                             public void onClick(View view) {
                                 Intent it = new Intent(getContext(), Duvida.class);
                                 it.putExtra("key", key);
-                                startActivity(it); }}); }
-                    else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time); }
+                                startActivity(it);
+                            }}); }
+                    else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time);
+                    final String key = perguntas.get(i).getKey();
+                    templatePerg.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent it = new Intent(getContext(), Duvida.class);
+                            it.putExtra("key", key);
+                            startActivity(it);
+                        }
+                    });
+                    }
                     scroll.addView(templatePerg);
                 }
             }
