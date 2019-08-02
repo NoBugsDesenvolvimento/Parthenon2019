@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,22 +45,20 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class Inscrever extends AppCompatActivity {
+    private RealmResults<Atividade> atividades;
+    private long inscCount = 0;
+    private String userKey = "fogogo";
+    private EditText searchBar;
+    private String searchText = "";
+    final private ArrayList<View> insc = new ArrayList<>();
 
-    private int num_pages;
-    private DateSlidePagerAdapter dateCollection;
-    private ViewPager viewPager;
-    private Set<Date> datesAux;
-    private static Vector<String> dates;
-    private static RealmResults<Atividade> atividades;
-    private static long inscCount = 0;
-    private static String userKey = "fogogo";
-    private static EditText searchBar;
-    private static String searchText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscrever);
+        userKey = ConfiguracaoFirebase.getFirebaseAutenticacao().getCurrentUser().getUid();
+        Log.v("rgk", userKey);
 
         final FirebaseDatabase db = ConfiguracaoFirebase.getDatabase();
         final DatabaseReference myRef = db.getReference("inscricoes/" + userKey);
@@ -76,186 +75,123 @@ public class Inscrever extends AppCompatActivity {
             }
         });
 
-        Realm realm = RealmHelper.getRealm(this);
-
-        atividades = realm.where(Atividade.class).findAll();
-        datesAux = new TreeSet<>();
-        int count = atividades.size();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        for (int i = 0; i < count; i++) {
-            try {
-                datesAux.add(formatter.parse(atividades.get(i).getData()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-        dates = new Vector<>();
-        for (Date date : datesAux) dates.add(formatter.format(date).substring(0, 5));
-        num_pages = dates.size();
-
-        dateCollection = new DateSlidePagerAdapter(getSupportFragmentManager());
-        viewPager = findViewById(R.id.datePager);
-        viewPager.setAdapter(dateCollection);
-        TabLayout tabs = findViewById(R.id.daysTabs);
-        tabs.setupWithViewPager(viewPager);
-
         searchBar = findViewById(R.id.search_insc);
 
     }
 
-    private class DateSlidePagerAdapter extends FragmentStatePagerAdapter {
-        private DateSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        @Override
-        public Fragment getItem(int position) {
-            searchText = searchBar.getText().toString();
-            Fragment fragment = new DayFragment();
-            Bundle bd = new Bundle();
-            bd.putInt("tab", position);
-            fragment.setArguments(bd);
-            return fragment;
-        }
+        Realm realm = RealmHelper.getRealm(this);
+        atividades = realm.where(Atividade.class).findAll();
 
-        @Override
-        public int getCount() {
-            return num_pages;
-        }
+        LinearLayout scroll = findViewById(R.id.atividades_insc);
+        scroll.removeAllViews();
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return dates.get(position);
-        }
+        int count = atividades.size();
+        for (int i = 0; i < count; i++) {
+            CardView templateInsc = (CardView) getLayoutInflater().inflate(R.layout.template_insc, scroll, false);
 
-    }
+            ((TextView) templateInsc.findViewById(R.id.name)).setText(atividades.get(i).getTitulo());
+            ((TextView) templateInsc.findViewById(R.id.time)).setText(atividades.get(i).getHora_inicial());
+            ((TextView) templateInsc.findViewById(R.id.local)).setText(atividades.get(i).getLocal());
+            ((TextView) templateInsc.findViewById(R.id.autor)).setText("esqueci tbm");
 
-    public static class DayFragment extends Fragment {
+            final CheckBox insc = templateInsc.findViewById(R.id.inscrever);
+            final FirebaseDatabase db = ConfiguracaoFirebase.getDatabase();
+            final String atividadeKey = atividades.get(i).getKey();
+            final DatabaseReference myRef = db.getReference("inscricoes/" + userKey + "/" + atividadeKey);
 
-        final private ArrayList<View> insc = new ArrayList<>();
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            LinearLayout scroll = getView().findViewById(R.id.date);
-            scroll.removeAllViews();
-
-            Bundle args = getArguments();
-            final RealmResults<Atividade> atividadesData = atividades.where().contains("data", dates.get(args.getInt("tab"))).findAll();
-            int count = atividadesData.size();
-            for (int i = 0; i < count; i++) {
-                CardView templateInsc = (CardView) getLayoutInflater().inflate(R.layout.template_insc, scroll, false);
-
-                ((TextView) templateInsc.findViewById(R.id.name)).setText(atividadesData.get(i).getTitulo());
-                ((TextView) templateInsc.findViewById(R.id.time)).setText(atividadesData.get(i).getHora_inicial());
-                ((TextView) templateInsc.findViewById(R.id.local)).setText(atividadesData.get(i).getLocal());
-                ((TextView) templateInsc.findViewById(R.id.autor)).setText("esqueci tbm");
-
-                final CheckBox insc = templateInsc.findViewById(R.id.inscrever);
-                final FirebaseDatabase db = ConfiguracaoFirebase.getDatabase();
-                final String atividadeKey = atividadesData.get(i).getKey();
-                final DatabaseReference myRef = db.getReference("inscricoes/" + userKey + "/" + atividadeKey);
-
-                insc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (b){
-                            if (inscCount < 5) {
-                                inscCount++;
-                                // 0 para indicar inscrito e 1 para confirmado
-                                myRef.setValue(0);
-                            }else{
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                builder.setMessage(R.string.limite_insc_text)
-                                        .setTitle(R.string.limite_insc_title);
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                                insc.setChecked(false);
-                            }
+            insc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b){
+                        if (inscCount < 5) {
+                            inscCount++;
+                            // 0 para indicar inscrito e 1 para confirmado
+                            myRef.setValue(0);
                         }else{
-                            inscCount--;
-                            myRef.removeValue();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
+                            builder.setMessage(R.string.limite_insc_text)
+                                    .setTitle(R.string.limite_insc_title);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                            insc.setChecked(false);
                         }
+                    }else{
+                        inscCount--;
+                        myRef.removeValue();
                     }
-                });
+                }
+            });
 
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()){
-                            insc.setOnCheckedChangeListener (null);
-                            insc.setChecked(true);
-                            insc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                @Override
-                                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                                    if (b){
-                                        if (inscCount < 5) {
-                                            inscCount++;
-                                            // 0 para indicar inscrito e 1 para confirmado
-                                            myRef.setValue(0);
-                                        }else{
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                            builder.setMessage(R.string.limite_insc_text)
-                                                    .setTitle(R.string.limite_insc_title);
-                                            AlertDialog dialog = builder.create();
-                                            dialog.show();
-                                            insc.setChecked(false);
-                                        }
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        insc.setOnCheckedChangeListener (null);
+                        insc.setChecked(true);
+                        insc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                                if (b){
+                                    if (inscCount < 5) {
+                                        inscCount++;
+                                        // 0 para indicar inscrito e 1 para confirmado
+                                        myRef.setValue(0);
                                     }else{
-                                        inscCount--;
-                                        myRef.removeValue();
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
+                                        builder.setMessage(R.string.limite_insc_text)
+                                                .setTitle(R.string.limite_insc_title);
+                                        AlertDialog dialog = builder.create();
+                                        dialog.show();
+                                        insc.setChecked(false);
                                     }
+                                }else{
+                                    inscCount--;
+                                    myRef.removeValue();
                                 }
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                scroll.addView(templateInsc);
-            }
-
-            getView().findViewsWithText(insc,"Inscricoes",View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
-            searchBar.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence newText, int i, int i1, int i2) {
-                    int total = insc.size();
-                    for (int j = 0; j < total; j++){
-                        String textString = ((TextView) insc.get(j).findViewById(R.id.name)).getText().toString().toLowerCase();
-                        if (!textString.contains(newText)){
-                            insc.get(j).setVisibility(View.GONE);
-                        }else{
-                            insc.get(j).setVisibility(View.VISIBLE);
-                        }
+                            }
+                        });
                     }
                 }
 
                 @Override
-                public void afterTextChanged(Editable editable) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
-            searchBar.setText(searchText);
-            searchBar.setSelection(searchBar.getText().length());
+
+            scroll.addView(templateInsc);
         }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater,
-                                 ViewGroup container, Bundle savedInstanceState) {
-            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.days, container, false);
+        scroll.findViewsWithText(insc,"Inscricoes",View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            return rootView;
-        }
+            }
 
+            @Override
+            public void onTextChanged(CharSequence newText, int i, int i1, int i2) {
+                int total = insc.size();
+                for (int j = 0; j < total; j++){
+                    String textString = ((TextView) insc.get(j).findViewById(R.id.name)).getText().toString().toLowerCase();
+                    if (!textString.contains(newText)){
+                        insc.get(j).setVisibility(View.GONE);
+                    }else{
+                        insc.get(j).setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        searchBar.setText(searchText);
+        searchBar.setSelection(searchBar.getText().length());
     }
 }

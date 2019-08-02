@@ -24,7 +24,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/empty"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/tvSumario"
@@ -41,7 +41,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/tvPalestrante"
@@ -58,7 +58,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@android:color/black"
         android:textStyle="normal" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/empty"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@android:color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -115,7 +115,7 @@
             android:ems="10"
             android:inputType="numberSigned"
             android:text="@string/empty"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/etData"
@@ -125,7 +125,7 @@
             android:ems="10"
             android:inputType="date"
             android:text="@string/empty"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -165,7 +165,7 @@
             android:ems="10"
             android:inputType="time"
             android:text="@string/empty"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/etHoraF"
@@ -175,7 +175,7 @@
             android:ems="10"
             android:inputType="time"
             android:text="@string/empty"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <Button
