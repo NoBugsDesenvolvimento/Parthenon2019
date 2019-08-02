@@ -19,28 +19,15 @@
         android:textSize="@dimen/big_font_size"
         android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+    <ImageView
+        android:id="@+id/imgEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:innerRadius="0dp"
-        android:shape="ring"
-        android:thicknessRatio="1.9"
-        app:cardBackgroundColor="@color/colorPrimaryDark"
-        app:cardCornerRadius="100dp">
-
-        <ImageView
-            android:id="@+id/imgEvento"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/empty"
-            android:src="@mipmap/palestra_img_bg" />
-
-    </androidx.cardview.widget.CardView>
+        android:contentDescription="@string/empty"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/palestra_img_bg" />
 
     <ScrollView
         android:layout_width="match_parent"
