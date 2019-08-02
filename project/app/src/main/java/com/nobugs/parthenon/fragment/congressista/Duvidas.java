@@ -109,7 +109,7 @@ public class Duvidas extends Fragment {
                             else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time); }
                             scroll.addView(templatePerg);
                         }
-                    }}
+                    }
                  else {
                         LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
 
@@ -140,7 +140,7 @@ public class Duvidas extends Fragment {
                         }
                         scroll.addView(templatePerg);
 
-                }
+                }}
 
 
 
