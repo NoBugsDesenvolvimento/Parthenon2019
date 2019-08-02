@@ -84,7 +84,7 @@ public class Inscrever extends AppCompatActivity {
         super.onResume();
 
         Realm realm = RealmHelper.getRealm(this);
-        atividades = realm.where(Atividade.class).findAll();
+        atividades = realm.where(Atividade.class).sort("hora_inicial").findAll();
 
         LinearLayout scroll = findViewById(R.id.atividades_insc);
         scroll.removeAllViews();

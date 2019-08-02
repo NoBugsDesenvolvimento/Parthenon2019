@@ -66,7 +66,7 @@ public class Programacao extends Fragment {
         super.onResume();
 
         Realm realm = RealmHelper.getRealm(getContext());
-        atividades = realm.where(Atividade.class).findAll();
+        atividades = realm.where(Atividade.class).sort("hora_inicial").findAll();
 
         LinearLayout scroll = getView().findViewById(R.id.atividades);
         scroll.removeAllViews();
