@@ -73,6 +73,7 @@ public class Duvidas extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         Realm realm = RealmHelper.getRealm(getContext());
         perguntas = realm.where(Pergunta.class).findAll();
@@ -84,8 +85,8 @@ public class Duvidas extends Fragment {
         Log.v("rgk", count + "");
         for (int i = count - 1; i >= 0; i--) {
 
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+                if ( user.getPhotoUrl() != null ){
 
                     if (!user.getPhotoUrl().toString().equals("admin")) {
 
@@ -108,7 +109,7 @@ public class Duvidas extends Fragment {
                             else { ((ImageView) templatePerg.findViewById(R.id.answered)).setImageResource(R.drawable.ic_time); }
                             scroll.addView(templatePerg);
                         }
-                    }
+                    }}
                  else {
                         LinearLayout templatePerg = (LinearLayout) getLayoutInflater().inflate(R.layout.template_perg, scroll, false);
 
