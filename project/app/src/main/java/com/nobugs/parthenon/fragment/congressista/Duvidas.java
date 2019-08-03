@@ -34,7 +34,6 @@ import io.realm.RealmResults;
 public class Duvidas extends Fragment {
     private static RealmResults<Pergunta> perguntas;
     private FloatingActionButton floatingActionButtonDuvidas;
-    private FloatingActionButton floatingActionButtonMaps;
     private AlertDialog alerta;
     final private ArrayList<View> pergs = new ArrayList<>();
     private static EditText searchBar;
@@ -46,16 +45,9 @@ public class Duvidas extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_duvidas, container, false);
 
         floatingActionButtonDuvidas = rootView.findViewById(R.id.floatingActionButton);
-        floatingActionButtonMaps = rootView.findViewById(R.id.floatingActionButtonMaps);
 
 
-        floatingActionButtonMaps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), MapsActivity.class);
-                startActivity(i);
-            }
-        });
+
 
         floatingActionButtonDuvidas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +78,7 @@ public class Duvidas extends Fragment {
         for (int i = count - 1; i >= 0; i--) {
 
 
-                if ( user.getPhotoUrl() != null ){
+                if (user != null && user.getPhotoUrl() != null ){
 
                     if (!user.getPhotoUrl().toString().equals("admin")) {
 
