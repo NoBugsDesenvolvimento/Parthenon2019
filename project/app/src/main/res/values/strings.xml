@@ -74,6 +74,7 @@
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
 
+
     <string name="title_confirma_edicao">Tem certeza que deseja confirmar as alterações dos dados desta atividade?</string>
     <string name="msg_confirma_edicao">Esta ação é irreversível.</string>
     <string name="editado_sucesso">Alterações salvas com sucesso!</string>
