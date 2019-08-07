@@ -27,7 +27,7 @@ import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 
 public class NavigationScreen extends FragmentActivity {
 
-    private static final int NUM_PAGES = 4;
+    private static final int NUM_PAGES = 3;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private BottomNavigationView navView;
@@ -62,9 +62,6 @@ public class NavigationScreen extends FragmentActivity {
                 case 1:
                     navView.setSelectedItemId(R.id.nav_faq);
                     break;
-                case 2:
-                    navView.setSelectedItemId(R.id.nav_noticias);
-                    break;
                 case 3:
                     navView.setSelectedItemId(R.id.nav_evento);
                     break;
@@ -88,14 +85,11 @@ public class NavigationScreen extends FragmentActivity {
                 case R.id.nav_prog:
                     viewPager.setCurrentItem(0);
                     return true;
-                case R.id.nav_noticias:
-                    viewPager.setCurrentItem(2);
-                    return true;
                 case R.id.nav_faq:
                     viewPager.setCurrentItem(1);
                     return true;
                 case R.id.nav_evento:
-                    viewPager.setCurrentItem(3);
+                    viewPager.setCurrentItem(2);
                     return true;
             }
             return false;
@@ -122,14 +116,10 @@ public class NavigationScreen extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                            return new Programacao();
-
-
+                    return new Programacao();
                 case 1:
                     return new Duvidas();
                 case 2:
-                    return new Noticias();
-                case 3:
                     return new EventoInfo();
             }
             return null;

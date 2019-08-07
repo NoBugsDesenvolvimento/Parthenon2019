@@ -22,7 +22,7 @@ import com.nobugs.parthenon.fragment.organizador.GerenciarAtividades;
 
 public class NavigationScreenAdmin extends FragmentActivity {
 
-    private static final int NUM_PAGES = 4;
+    private static final int NUM_PAGES = 3;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private BottomNavigationView navView;
@@ -59,9 +59,6 @@ public class NavigationScreenAdmin extends FragmentActivity {
                     navView.setSelectedItemId(R.id.nav_faq_adm);
                     break;
                 case 2:
-                    navView.setSelectedItemId(R.id.nav_noticias_adm);
-                    break;
-                case 3:
                     navView.setSelectedItemId(R.id.nav_evento_adm);
                     break;
             }
@@ -87,11 +84,8 @@ public class NavigationScreenAdmin extends FragmentActivity {
                 case R.id.nav_faq_adm:
                     viewPager.setCurrentItem(1);
                     return true;
-                case R.id.nav_noticias_adm:
-                    viewPager.setCurrentItem(2);
-                    return true;
                 case R.id.nav_evento_adm:
-                    viewPager.setCurrentItem(3);
+                    viewPager.setCurrentItem(2);
                     return true;
             }
             return false;
@@ -122,8 +116,6 @@ public class NavigationScreenAdmin extends FragmentActivity {
                 case 1:
                     return new Duvidas();
                 case 2:
-                    return new EnviarNoticias();
-                case 3:
                     return new EventoEditar();
             }
             return null;
