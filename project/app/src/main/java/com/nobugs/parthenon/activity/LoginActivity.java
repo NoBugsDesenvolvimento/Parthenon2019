@@ -153,16 +153,9 @@ public class LoginActivity extends AppCompatActivity {
                 usuarioTentandoLogar.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String retorno = dataSnapshot.getValue().toString();
-                        String[] atributos = retorno.split(",");
-                        String email = atributos[5].substring(7);
-                        String status = atributos[6].substring(8, atributos[6].length()-1);
+                        Usuario usuario = dataSnapshot.getValue(Usuario.class);
                         String senha = senhaUsuarioLogin.getText().toString();
-
-                        Usuario usuario = new Usuario();
                         usuario.setCPF(dataSnapshot.getKey());
-                        usuario.setEmail(email);
-                        usuario.setStatus(status);
                         usuario.setSenha(senha);
                         validacaoUsuario(usuario);
                         }
@@ -209,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                 else { String excecao = "";
                     try { throw task.getException(); }
                     catch ( FirebaseAuthInvalidUserException e ) { excecao = "Usuário não está cadastrado."; }
-                    catch ( FirebaseAuthInvalidCredentialsException e ){ excecao = "E-mail e senha não correspondem a um usuário cadastrado"; }
+                    catch ( FirebaseAuthInvalidCredentialsException e ){ excecao = "E-mail e senha não correspondem a um usuário cadastrado."; }
                     catch (Exception e){ excecao = "Erro ao cadastrar usuário: "  + e.getMessage();
                         e.printStackTrace(); }
                     Toast.makeText(LoginActivity.this, excecao, Toast.LENGTH_SHORT).show(); }
