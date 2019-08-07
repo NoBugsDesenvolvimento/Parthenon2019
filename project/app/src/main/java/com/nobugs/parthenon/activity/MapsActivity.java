@@ -57,8 +57,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
 
-
-
         LatLng pvb = new LatLng(-20.763456, -42.866379);
         LatLng pva = new LatLng(-20.760406, -42.867570);
         LatLng cce = new LatLng(-20.764780, -42.868439);
