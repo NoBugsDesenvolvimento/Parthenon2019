@@ -20,6 +20,7 @@ import com.nobugs.parthenon.activity.MapsActivity;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.model.Evento;
+import com.nobugs.parthenon.model.Logado;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -42,6 +43,14 @@ public class EventoInfo extends Fragment {
             @Override
             public void onClick(View view) {
                 try{auth.signOut();
+
+                    Realm realm = RealmHelper.getRealm(getContext());
+
+                    Logado user = new Logado("offline");
+                    RealmHelper.startTransaction();
+                    realm.insertOrUpdate(user);
+                    RealmHelper.endTransaction();
+
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent); }
                 catch (Exception e){

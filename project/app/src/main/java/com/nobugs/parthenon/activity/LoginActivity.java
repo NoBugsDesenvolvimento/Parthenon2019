@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -29,9 +30,11 @@ import com.nobugs.parthenon.R;
 import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 import com.nobugs.parthenon.helper.RealmHelper;
 import com.nobugs.parthenon.helper.UsuarioFirebase;
+import com.nobugs.parthenon.model.Logado;
 import com.nobugs.parthenon.model.Usuários.Usuario;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -51,6 +54,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         RealmHelper.getRealm(this);
+
+        Realm realm = RealmHelper.getRealm(this);
+        RealmResults<Logado> logado = realm.where(Logado.class).equalTo("unique", "id").findAll();
+        if (logado.size() == 0){
+            Logado user = new Logado("offline");
+            RealmHelper.startTransaction();
+            realm.insertOrUpdate(user);
+            RealmHelper.endTransaction();
+        }
 
         ConfiguracaoFirebase.updateValues("atividades", this);
         ConfiguracaoFirebase.updateValues("evento", this);
@@ -148,6 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                         String senha = senhaUsuarioLogin.getText().toString();
 
                         Usuario usuario = new Usuario();
+                        usuario.setCPF(dataSnapshot.getKey());
                         usuario.setEmail(email);
                         usuario.setStatus(status);
                         usuario.setSenha(senha);
@@ -167,9 +180,27 @@ public class LoginActivity extends AppCompatActivity {
                 if( task.isSuccessful() ){
 
                     if(usuario.getStatus().equals("Organizador")){
+
+                        Realm realm = RealmHelper.getRealm(getBaseContext());
+
+                        Logado user = new Logado(usuario.getCPF());
+                        user.setAdmin(true);
+
+                        RealmHelper.startTransaction();
+                        realm.insertOrUpdate(user);
+                        RealmHelper.endTransaction();
+
                         startActivity( new Intent(LoginActivity.this, NavigationScreenAdmin.class) );
                         finish();   }
                     else{
+                        Realm realm = RealmHelper.getRealm(getBaseContext());
+
+                        Logado user = new Logado(usuario.getCPF());
+
+                        RealmHelper.startTransaction();
+                        realm.insertOrUpdate(user);
+                        RealmHelper.endTransaction();
+
                         startActivity( new Intent(LoginActivity.this, NavigationScreen.class) );
                         finish();
                     }
@@ -189,19 +220,20 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void usuarioLogado() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null) {
-          if(user.getPhotoUrl() != null)  {
-              if(user.getPhotoUrl().toString().equals("admin")){
+        Realm realm = RealmHelper.getRealm(this);
+        RealmResults<Logado> logado = realm.where(Logado.class).equalTo("unique", "id").findAll();
+
+        if (!logado.get(0).getKey().equals("offline")){
+            if (logado.get(0).isAdmin()){
                 startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class));
-                  finish();
-              }}
-            else{ startActivity(new Intent(LoginActivity.this, NavigationScreen.class));
-              finish();
+                finish();
+            }else{
+                startActivity(new Intent(LoginActivity.this, NavigationScreen.class));
+                finish();
             }
-
         }
+
     }
 
     public void inicializarComponentes(){
