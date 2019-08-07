@@ -233,6 +233,14 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         }
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            if (user != null) {
+                if(user.getPhotoUrl() != null)  {
+                    if(user.getPhotoUrl().toString().equals("admin")){ startActivity(new Intent(LoginActivity.this, NavigationScreenAdmin.class));
+                        finish(); }
+                    else{ startActivity(new Intent(LoginActivity.this, NavigationScreen.class));
+                        finish();     } } }
 
     }
 
