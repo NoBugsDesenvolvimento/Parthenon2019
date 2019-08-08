@@ -105,6 +105,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(DZO).title("DZO - Departamento de Zootecnia"));
         LatLng DFIT = new LatLng(-20.758601, -42.871213);
         mMap.addMarker(new MarkerOptions().position(DFIT).title("Departamento de Fititotecnia"));
+        LatLng DCM = new LatLng(-20.762975, -42.869239);
+        mMap.addMarker(new MarkerOptions().position(DCM).title("DCM - Departamento de Comunicação Social"));
 
 
         mMap.addMarker(new MarkerOptions().position(pvb).title("PVB - Pavilhão de Aulas B."));
