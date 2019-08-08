@@ -15,17 +15,13 @@ public class Atividade extends RealmObject {
     @PrimaryKey
     private String key;
 
-    @Required
     private String titulo;
-    @Required
     private String sumario;
 
     private int tipo;
     private String local;
     private String latlng;
-    @Required
     private String data;
-    @Required
     private String hora_inicial;
     private String hora_final;
 
