@@ -239,7 +239,7 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void politicaPrivacidade(View view){
-        Uri uri = Uri.parse("https://drive.google.com/open?id=1gbVpd1-GboNbPZJdselHPQ9RMLdDZy24");
+        Uri uri = Uri.parse("http://politicamostrauniversitaria.nobugs.com.br/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }

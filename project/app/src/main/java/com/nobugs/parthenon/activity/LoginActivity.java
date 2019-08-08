@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -266,4 +267,10 @@ public class LoginActivity extends AppCompatActivity {
         alerta.show();
     }
 
+
+    public void politicaPrivacidade(View view){
+        Uri uri = Uri.parse("http://politicamostrauniversitaria.nobugs.com.br/");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
 }
