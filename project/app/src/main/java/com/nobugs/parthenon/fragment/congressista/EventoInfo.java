@@ -46,10 +46,7 @@ public class EventoInfo extends Fragment {
 
                     Realm realm = RealmHelper.getRealm(getContext());
 
-                    Logado user = new Logado("offline");
-                    RealmHelper.startTransaction();
-                    realm.insertOrUpdate(user);
-                    RealmHelper.endTransaction();
+                    RealmHelper.dropDatabase();
 
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent); }
