@@ -65,9 +65,8 @@ public class LoginActivity extends AppCompatActivity {
             RealmHelper.endTransaction();
         }
 
-        ConfiguracaoFirebase.updateValues("atividades", this);
-        ConfiguracaoFirebase.updateValues("evento", this);
-        ConfiguracaoFirebase.updateValues("perguntas", this);
+        ConfiguracaoFirebase.updateValues("evento", this, false);
+        ConfiguracaoFirebase.updateValues("perguntas", this, false);
 
         usuarioLogado();
         avisoEntrada();

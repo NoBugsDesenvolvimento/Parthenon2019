@@ -37,6 +37,8 @@ public class NavigationScreen extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ConfiguracaoFirebase.updateValues("atividades", this, true);
+
         setContentView(R.layout.activity_navigation_screen);
 
         viewPager = findViewById(R.id.screenPager);

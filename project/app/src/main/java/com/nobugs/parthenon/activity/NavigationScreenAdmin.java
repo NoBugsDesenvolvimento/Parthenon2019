@@ -19,6 +19,7 @@ import com.nobugs.parthenon.fragment.organizador.EnviarNoticias;
 import com.nobugs.parthenon.fragment.organizador.EventoEditar;
 import com.nobugs.parthenon.fragment.congressista.Duvidas;
 import com.nobugs.parthenon.fragment.organizador.GerenciarAtividades;
+import com.nobugs.parthenon.helper.ConfiguracaoFirebase;
 
 public class NavigationScreenAdmin extends FragmentActivity {
 
@@ -32,6 +33,7 @@ public class NavigationScreenAdmin extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ConfiguracaoFirebase.updateValues("atividades", this, false);
 
         setContentView(R.layout.activity_navigation_screen_adm);
 
